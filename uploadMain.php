@@ -48,9 +48,9 @@
             continue;
         }
 
-        $block = $row[1];
+        // $block = $row[1];
 
-        $sqlQuerry = "INSERT INTO masterdata(ID,Block) VALUES (\"$id\", \"$block\")";
+        $sqlQuerry = "INSERT INTO masterdata(ID) VALUES (\"$id\")";
 
         try {
             $conn->exec($sqlQuerry);

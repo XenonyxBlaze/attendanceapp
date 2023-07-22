@@ -23,7 +23,7 @@
 
     $sheet = $reader->load($attendance_file)->getActiveSheet();
 
-    $records = array_slice($sheet->toArray(),7);
+    $records = array_slice($sheet->toArray(),1);
 
     $insertions = 0;
 
@@ -55,5 +55,5 @@
     $count = $conn->query("SELECT count(*) FROM turnstile")->fetchColumn();
 
     if ($count == $insertions) {
-        echo "All files uploaded";
+        header('Location: generateReport.php');
     }

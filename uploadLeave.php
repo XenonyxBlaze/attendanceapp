@@ -1,7 +1,23 @@
 <?php
 
-if (!isset($exceptions_file)) {
-    header('Location: uploadAttendance.php');
+require_once 'vendor\autoload.php';
+
+use \PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+
+$reader = new Xlsx();
+$exceptions_file = "uploads/leaveData.xlsx";
+
+$sqlServer = "localhost:3306";
+$sqlUser = "root";
+$sqlPass = "toor";
+
+try {
+    $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    echo "Connection to SQL database failed: " . $e->getMessage();
+    die;
 }
 
 $sheet = $reader->load($exceptions_file)->getActiveSheet();
@@ -14,12 +30,6 @@ foreach($records as $row) {
     $sqlQuerry = null;
 
     $id = strtoupper($row[0]);
-
-    if (!preg_match("/^\d{2}[A-Z]{3}\d{5}$/",$id)) {
-        continue;
-    }
-
-    $block = $row[1];
 
     $sqlQuerry = "INSERT INTO onleave(ID) VALUES (\"$id\")";
 
@@ -36,7 +46,7 @@ echo "Uploaded hostel data".PHP_EOL;
 echo "Insertions: ".$insertions.PHP_EOL;
 
 
-$count = $pdo->query("SELECT count(*) FROM onleave")->fetchColumn();
+$count = $conn->query("SELECT count(*) FROM onleave")->fetchColumn();
 if ($insertions == (int) $count) {
     header('Location: uploadAttendance.php');
 }
