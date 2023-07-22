@@ -1,5 +1,8 @@
 
 <?php
+
+    echo "Uploading main hostel data".PHP_EOL;
+
     require_once 'vendor\autoload.php';
 
     use \PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -26,35 +29,45 @@
         echo "Connection to SQL database failed: " . $e->getMessage();
         die;
     }
-
-
+    
     $reader = new Xlsx();
+    // Process Main data
 
-    // Process attendance file
+    $sheet = $reader->load($data_file)->getActiveSheet();
 
-    $sheet = $reader->load($attendance_file)->getActiveSheet();
+    $records = array_slice($sheet->toArray(),1);
 
-    $records = array_slice($sheet->toArray(),7);
+    $insertions=0;
+
     foreach($records as $row) {
-
         $sqlQuerry = null;
 
-        $name = $row[0];
-        $id = strtoupper($row[1]);
+        $id = strtoupper($row[0]);
 
-        $date = $row[4];
-        $time = $row[5];
+        if (!preg_match("/^\d{2}[A-Z]{3}\d{5}$/",$id)) {
+            continue;
+        }
 
-        $sqlQuerry = "INSERT INTO turnstile(StuName, ID, _Date, _Time) VALUES (\"$name\",\"$id\",\"$date\",\"$time\")";
+        $block = $row[1];
+
+        $sqlQuerry = "INSERT INTO masterdata(ID,Block) VALUES (\"$id\", \"$block\")";
 
         try {
             $conn->exec($sqlQuerry);
+            $insertions++;
         } catch(PDOException $e) {
             echo "Error : " . $e->getMessage()."<br>";
         }
+
     }
 
     
+    echo "Uploaded hostel data".PHP_EOL;
+    echo "Insertions: ".$insertions.PHP_EOL;
 
-    // Process Main data
-
+    
+    $count = $conn->query("SELECT count(*) FROM masterdata")->fetchColumn();
+    
+    if ($insertions == (int) $count) {
+        header('Location: uploadLeave.php');
+    }

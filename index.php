@@ -23,7 +23,7 @@
             }
 
             // Redirect to the attendance page
-            header('Location: upload.php');
+            header('Location: uploadMain.php');
             
         } else {
             echo 'Please upload all the files';
@@ -45,9 +45,9 @@
             </h3>
             <input type="file" name="hostelData" id="hostelData">
             <h3>Upload leave data: </h3>
-            <input disabled type="file" name="leaveData" id="leaveData">
+            <input type="file" name="leaveData" id="leaveData">
             <h3>Upload turnstile data: </h3>
-            <input disabled type="file" name="turnstileData" id="turnstileData">
+            <input type="file" name="turnstileData" id="turnstileData">
             <br>
             <h2>Get Attendance:</h2>
             <input type="submit" value="Fetch" name="submit">
