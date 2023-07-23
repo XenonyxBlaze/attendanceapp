@@ -42,10 +42,6 @@ foreach($records as $row) {
 
 }
 
-echo "Uploaded hostel data".PHP_EOL;
-echo "Insertions: ".$insertions.PHP_EOL;
-
-
 $count = $conn->query("SELECT count(*) FROM onleave")->fetchColumn();
 if ($insertions == (int) $count) {
     header('Location: uploadAttendance.php');

@@ -1,8 +1,5 @@
 
 <?php
-
-    echo "Uploading main hostel data".PHP_EOL;
-
     require_once 'vendor\autoload.php';
 
     use \PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -60,11 +57,6 @@
         }
 
     }
-
-    
-    echo "Uploaded hostel data".PHP_EOL;
-    echo "Insertions: ".$insertions.PHP_EOL;
-
     
     $count = $conn->query("SELECT count(*) FROM masterdata")->fetchColumn();
     
