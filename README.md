@@ -2,11 +2,11 @@
 
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Welcome to the VIT Bhopal Hostel Attendance Integrator! This project is developed by 3rd year CSE students [Aarav Rajput](https://github.com/XenonyxBlaze), [Anand Lahoti](https://github.com/foundanand), [Utkarsh Parashar](https://github.com/thedabworthyglitch), [Vaasu Bisht](https://github.com/vaasu2002), and [Vansh Dugar](https://github.com/). The integrator serves as a front-end for hostel attendance, utilizing biometric turnstile data and integrating it with VTOP, the student-staff portal for VIT Bhopal.
+Welcome to the VIT Bhopal Hostel Attendance Integrator! This project is assigned by Dr. Shanmugam Poonkuntran, Dean SCSE, VIT Bhopal and developed by 3rd year CSE students [Aarav Rajput](https://github.com/XenonyxBlaze), [Anand Lahoti](https://github.com/foundanand), [Utkarsh Parashar](https://github.com/thedabworthyglitch), [Vaasu Bisht](https://github.com/vaasu2002), and [Vansh Dugar](https://github.com/). The integrator serves as a front-end for hostel attendance, utilizing biometric turnstile data and integrating it with VTOP, the student-staff portal for VIT Bhopal.
 
 ## 📝 Project Description
 
-The VIT Bhopal Hostel Attendance Integrator streamlines the attendance management process by effectively combining biometric turnstile data with the university's student-staff portal. The system is designed to handle large volumes of data efficiently, providing real-time attendance updates and ensuring accurate records.
+The VIT Bhopal Hostel Attendance Integrator streamlines the attendance management process by effectively combining biometric turnstile data with the university's student-staff portal. The system is designed to handle large volumes of data efficiently, providing real-time attendance updates and ensuring accurate records. This project also undertakes the concepts of data analysis and processing in order to ease up human-oriented tasks.
 
 ## ⚙️ Technologies Used
 
