@@ -60,5 +60,80 @@ foreach($report as $record) {
 }
 
 $writer->save($reportFile);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
-header('Location: AttendanceReport.php');
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+
+    </style>
+
+
+    <form action="AttendanceReport.php" method="post">
+        <button type="submit">Download</button>
+    </form>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Attendance Status</th>
+        </tr>
+        <?php foreach($sheet->toArray(  ) as $key => $value): ?>
+            <?php if($key > 0): ?>
+                <tr>
+                    <td><?php echo $value[0]; ?></td>
+                    <td><?php echo $value[1]; ?></td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+    </table>
+
+</body>
+</html>
+
