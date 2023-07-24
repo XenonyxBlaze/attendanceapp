@@ -54,11 +54,7 @@ If you encounter any issues, have questions, or need assistance, feel free to re
 
 ## 📜 Acknowledgments
 
-We extend our heartfelt gratitude to the faculty, mentors, and everyone who supported us during the development of this project.
-
-## 📜 Changelog
-
-For a detailed list of changes for each release, check out the [`Changelog`](./Changelog.md) file.
+We extend our heartfelt gratitude to the faculty, staff, and most of all, Poonkuntran Sir who supported us during the development of this project.
 
 ---
 
