@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 
     require_once 'vendor\autoload.php';
 
@@ -80,10 +80,8 @@
                         echo "Error : " . $e->getMessage()."<br>";
                     }
                 }
-            
-            
                 $count = $conn->query("SELECT count(*) FROM masterdata")->fetchColumn();
-                
+
                 if ($insertions == (int) $count) {
                     return true;
                 }
@@ -115,10 +113,9 @@
                         echo "Error : " . $e->getMessage()."<br>";
                     }
                 }
-            
-            
+
                 $count = $conn->query("SELECT count(*) FROM onleave")->fetchColumn();
-                
+
                 if ($insertions == (int) $count) {
                     return true;
                 }
@@ -184,7 +181,6 @@
             }
 
 
-            
         } else {
             echo 'Please upload all the files';
         }
@@ -197,7 +193,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+
     <title>Attendance App</title>
 </head>
 <body>

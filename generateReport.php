@@ -117,7 +117,7 @@ $writer->save($reportFile);
     <form action="AttendanceReport.php" method="post">
         <button type="submit">Download</button>
     </form>
-    
+
     <table>
         <tr>
             <th>ID</th>
