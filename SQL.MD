@@ -1,6 +1,12 @@
-### CREATE TABLES
+### C
 
-```.sql
+### CREATE DATABASE
+```sql
+CREATE DATABASE IF NOT EXISTS attendence_system_test;  
+USE attendence_system_test;
+```
+
+```sql
 CREATE TABLE IF NOT EXISTS boysblock1(ID varchar(255), NAME varchar(255),BLOCK varchar(255),ROOMNUM VARCHAR(255));
 CREATE TABLE IF NOT EXISTS boysblock2(ID varchar(255), NAME varchar(255),BLOCK varchar(255),ROOMNUM VARCHAR(255));
 CREATE TABLE IF NOT EXISTS boysblock3(ID varchar(255), NAME varchar(255),BLOCK varchar(255),ROOMNUM VARCHAR(255));
@@ -20,7 +26,9 @@ CREATE TABLE attendance (
 
 
 #### Add testing data
-```.sql
+```sql
+
+TRUNCATE TABLE boysblock3;
 INSERT INTO attendence_system_test.boysblock3(ID, NAME, BLOCK,ROOMNUM)
 VALUES
     ('21MIM10035', 'VAASU','BoysHostel3','B 304'),
@@ -30,6 +38,8 @@ VALUES
     ('21MIM10033', 'VIRAT','BoysHostel3','A202'),
     ('21MIM10036','UTTHAN','BoysHostel3','A232');
 
+
+TRUNCATE TABLE boysblock1;
 INSERT INTO attendence_system_test.boysblock1(ID, NAME, BLOCK,ROOMNUM)
 VALUES
     ('21MIM10010', 'ANAND','BoysHostel1','176'),
@@ -38,6 +48,8 @@ VALUES
     ('21MIM10049', 'SIDDHART','BoysHostel1','625'),
     ('21MIM10026', 'PRANAV','BoysHostel1','625');
 
+
+TRUNCATE TABLE boysblock2;
 INSERT INTO attendence_system_test.boysblock2(ID, NAME, BLOCK,ROOMNUM)
 VALUES
     ('20MIM10010', 'ABC','BoysHostel2','A 176'),
