@@ -1,5 +1,7 @@
 # SQL QUERY 25th July 2023 PROTOTYPE 1
 
+[DOCS](https://docs.google.com/document/d/1B_Ps6LLV2A8YA4bXxpEOA_iipVVQZX85vx48fr-3TgU/edit?usp=sharing)
+
 In this version, the main database will already contain student data for those belonging to the hostel, and this database will be used for all processing. When uploading the leave sheet and turnstile data for a specific day, there will be a drop-down menu available. If the person selects "Block 1" from the drop-down menu, any files they upload will pertain to students residing in that respective block (i.e., Block 1). The logic query will dynamically retrieve the main table data for Block 1 based on the selection made in the dropdown menu. Consequently, it will provide the attendance results for the students in Block 1.
 
 
