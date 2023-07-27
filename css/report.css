@@ -1,5 +1,26 @@
 @import url("./root.css");
 
+#form-data {
+  margin: 0 auto;
+  width: 90%;
+}
+#form-data form {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  gap: 1rem;
+}
+#form-data input,
+#form-data select {
+  width: 20%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-border);
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
 h2 {
   margin: 0;
   padding: 0.5rem;
@@ -30,20 +51,40 @@ h2 {
 }
 
 #downloadbtns > button,
-#blockbtns > button {
+#blockbtns > label {
   background-color: var(--primary-bg);
   border: 1px solid var(--primary-border);
   border-radius: 0.5rem;
   cursor: pointer;
+  text-align: center;
 }
 
 #blockbtns {
-  width: 90%;
+  width: 100%;
 }
 
-#blockbtns > button {
+#blockbtns > label {
+  background-color: var(--secondary-bg);
   width: 25%;
   border-radius: 0.5rem 0.5rem 0 0;
+}
+
+#blockbtns input {
+  display: none;
+}
+
+#blockbtns input:checked + label {
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  border-bottom: 0px;
+}
+
+#main-data {
+  background-color: var(--primary-bg);
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  padding-bottom: 2rem;
 }
 
 table {
@@ -52,6 +93,7 @@ table {
   border-collapse: collapse;
   text-align: center;
 }
+
 td,
 th {
   border: 1px solid var(--primary-border);
