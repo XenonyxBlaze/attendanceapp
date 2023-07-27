@@ -13,7 +13,7 @@ $sqlUser = "root";
 $sqlPass = "toor";
 
 try {
-    $conn = new PDO("mysql:host=$sqlServer;dbname=attendence_system_test", $sqlUser, $sqlPass);
+    $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->exec("TRUNCATE TABLE turnstile;");
