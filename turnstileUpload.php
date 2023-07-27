@@ -12,7 +12,7 @@ $sqlUser = "root";
 $sqlPass = "toor";
 
 try {
-    $conn = new PDO("mysql:host=$sqlServer;dbname=attendence_system_test", $sqlUser, $sqlPass);
+    $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -28,6 +28,8 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
     $insertions = 0;
     $notStudent = 0;
+
+    $timestamp = date('dmY',time());
 
     foreach($records as $row) {
 
@@ -54,7 +56,16 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         $checkpoint = $row[8];
 
-        $sqlQuerry = "INSERT INTO turnstile_$block(ID, Date, Time, Person_Group, Attendance_Check_Point) VALUES (\"$id\",\"$date\",\"$time\",\"$grp\",\"$checkpoint\")";
+        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile_".$block."_".$timestamp."(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));";
+
+        try {
+            $conn->exec($createQuery);
+        } catch(PDOException $e) {
+            echo $sqlQuerry."<br>";
+            echo "Error : " . $e->getMessage()."<br>";
+        }
+    
+        $sqlQuerry = "INSERT INTO turnstile_".$block."_".$timestamp."(ID, Date, Time, Person_Group, Attendance_Check_Point) VALUES (\"$id\",\"$date\",\"$time\",\"$grp\",\"$checkpoint\");";
 
         try {
             $conn->exec($sqlQuerry);
@@ -89,7 +100,7 @@ $targetFolder = 'uploads/turnstile/';
 $uploadedFiles = $_FILES['tFiles'];
 $countFiles = count($uploadedFiles['name']);
 
-$timestamp = date("d-m-Y",time());
+$timestamp = date("dmY",time());
 // Loop through all the uploaded files
 
 foreach($uploadedFiles['name'] as $key => $fileName) {
@@ -103,6 +114,10 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
             
             if(sqlTurnstile($reader, $targetFolder.$targetFile, $conn)) {
                 echo $fileName." uploaded to database successfully<br>";
+                // delete stored file
+                
+                unlink($targetFolder.$targetFile);
+                
             } else {
                 echo $fileName." upload to database failed<br>";
             }
@@ -122,4 +137,4 @@ $_POST['date']=$timestamp;
 $_POST['block']='b1';
 $_POST['status']='all';
 
-header('Location: generateReport.php');
+// header('Location: generateReport.php');

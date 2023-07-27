@@ -15,7 +15,6 @@ try {
     die;
 }
 
-
 if(!isset($_POST['submit']) && !isset($_POST['date']) && !isset($_POST['block']) && !isset($_POST['status'])) {
     header('Location: report.html');
 } else {
@@ -24,9 +23,4 @@ if(!isset($_POST['submit']) && !isset($_POST['date']) && !isset($_POST['block'])
     $status = $_POST['status'];
 }
 
-$reportFilePath = "uploads/reports/".$block.'/';
-$reportFile = 'AttendanceReport_'.$date.'_'.$status.'.xlsx';
 
-if(file_exists($reportFilePath.$reportFile)) {
-
-}
