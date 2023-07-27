@@ -6,7 +6,11 @@ CREATE TABLE IF NOT EXISTS boysblock2(ID varchar(255), NAME varchar(255),BLOCK v
 CREATE TABLE IF NOT EXISTS boysblock3(ID varchar(255), NAME varchar(255),BLOCK varchar(255),ROOMNUM VARCHAR(255));
 CREATE TABLE IF NOT EXISTS girlsblock1(ID varchar(255), NAME varchar(255),BLOCK varchar(255),ROOMNUM VARCHAR(255));
 
-CREATE TABLE IF NOT EXISTS turnstile(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));
+CREATE TABLE IF NOT EXISTS turnstile_b1(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));
+CREATE TABLE IF NOT EXISTS turnstile_b2(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));
+CREATE TABLE IF NOT EXISTS turnstile_b3(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));
+CREATE TABLE IF NOT EXISTS turnstile_gh(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));
+
 CREATE TABLE IF NOT EXISTS leaves(ID varchar(255),STATUS varchar(255));
 
 CREATE TABLE attendance (
