@@ -55,7 +55,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
             $block = 'GH';
         }
 
-        $checkpoint = $row[8];
+        $checkpoint = $row[9];
 
         $createQuery = "CREATE TABLE IF NOT EXISTS turnstile".$block.$timestamp."(ID varchar(255), Name varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
 
@@ -66,7 +66,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
             echo "Error : " . $e->getMessage()."<br>";
         }
     
-        $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Person_Group, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
+        $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
 
         try {
             $conn->exec($sqlQuerry);
@@ -133,9 +133,5 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
 
 $conn = null;
 
-$_POST['submit']=true;
-$_POST['date']=$timestamp;
-$_POST['block']='b1';
-$_POST['status']='all';
+header('Location: generateReport.php');
 
-// header('Location: generateReport.php');
