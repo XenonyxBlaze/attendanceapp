@@ -15,7 +15,6 @@ try {
     $conn = new PDO("mysql:host=$sqlServer;dbname=attendence_system_test", $sqlUser, $sqlPass);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->exec("TRUNCATE TABLE turnstile;");
 
 } catch(PDOException $e) {
     echo "Connection to SQL database failed: " . $e->getMessage();
@@ -118,4 +117,9 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
 
 $conn = null;
 
-header('Location: report.php');
+$_POST['submit']=true;
+$_POST['date']=$timestamp;
+$_POST['block']='b1';
+$_POST['status']='all';
+
+header('Location: generateReport.php');

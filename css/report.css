@@ -1,0 +1,69 @@
+@import url("./root.css");
+
+h2 {
+  margin: 0;
+  padding: 0.5rem;
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--primary-border);
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+#downloadbtns,
+#blockbtns {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem auto;
+  width: 70%;
+}
+
+#downloadbtns > *,
+#blockbtns > * {
+  width: 20%;
+  margin: 0;
+  padding: 0.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+#downloadbtns > button,
+#blockbtns > button {
+  background-color: var(--primary-bg);
+  border: 1px solid var(--primary-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#blockbtns {
+  width: 90%;
+}
+
+#blockbtns > button {
+  width: 25%;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+td,
+th {
+  border: 1px solid var(--primary-border);
+  padding: 0.5rem;
+}
+
+th {
+  background-color: var(--secondary-bg);
+  color: var(--primary-color);
+}
+
+tr:nth-of-type(2n + 1) {
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+}
