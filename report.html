@@ -1,16 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/root.css" />
+    <link rel="stylesheet" href="css/report.css" />
     <title>Attendance Report</title>
-</head>
-<body>
-    <h2>Generate attendance report:</h2>
-
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for=""></label>
+  </head>
+  <body>
+    <h2>View attendance report:</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+      <input type="text" name="name" id="filter-name" placeholder="Name" />
+      <input
+        type="text"
+        name="regno"
+        id="filter-regno"
+        placeholder="Registration Number"
+      />
+      <input type="date" name="date" id="filter-date" />
+      <select name="status" id="filter-status">
+        <option value="all">All</option>
+        <option value="present">Present</option>
+        <option value="absent">Absent</option>
+        <option value="onleave">On Leave</option>
+        <option value="leavebutreported">Leave But Reported</option>
+      </select>
+      <input type="submit" value="Go" />
     </form>
-</body>
+    <div id="main-data">
+      <div id="blockbtns">
+        <button>Boys Block-1</button>
+        <button>Boys Block-2</button>
+        <button>Boys Block-3</button>
+        <button>Girls Block-1</button>
+      </div>
+      <div id="downloadbtns">
+        <p>Download as:</p>
+        <button id="download-as-Excel">Excel</button>
+        <button id="download-as-CSV">CSV</button>
+        <button id="download-as-PDF">PDF</button>
+      </div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Perspiciatis.</td>
+          <td>Vel?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Reprehenderit.</td>
+          <td>Saepe?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Sint?</td>
+          <td>Minima?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Odio!</td>
+          <td>Dolorum.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Quibusdam!</td>
+          <td>Quo.</td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>
-
