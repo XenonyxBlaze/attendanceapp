@@ -38,6 +38,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
         // $name = $row[0];
         $id = strtoupper($row[1]);
 
+        $name = $row[0];
         
         if (!preg_match("/^\d{2}[a-zA-Z]{3}\d{5}$/",$id)) {
             $notStudent++;
@@ -46,26 +47,26 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         $date = $row[4];
         $time = $row[5];
-        $grp = substr($row[7],11);
+        $grp = substr($row[7],12);
 
         if(preg_match("/[a-zA-Z]{5}\s\d$/",$grp)) {
-            $block = 'b'.substr($grp,-1);
+            $block = 'B'.substr($grp,-1);
         } else {
-            $block = 'gh';
+            $block = 'GH';
         }
 
         $checkpoint = $row[8];
 
-        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile_".$block."_".$timestamp."(ID varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
+        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile".$block.$timestamp."(ID varchar(255), Name varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
 
         try {
             $conn->exec($createQuery);
         } catch(PDOException $e) {
-            echo $sqlQuerry."<br>";
+            echo $createQuery."<br>";
             echo "Error : " . $e->getMessage()."<br>";
         }
     
-        $sqlQuerry = "INSERT INTO turnstile_".$block."_".$timestamp."(ID, Date, Time, Person_Group, Attendance_Check_Point) VALUES (\"$id\",\"$date\",\"$time\",\"$grp\",\"$checkpoint\");";
+        $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Person_Group, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
 
         try {
             $conn->exec($sqlQuerry);
