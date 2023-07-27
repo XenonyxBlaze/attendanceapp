@@ -5,9 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/root.css" />
     <link rel="stylesheet" href="css/report.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
     <title>Attendance Report</title>
   </head>
   <body>
+    <!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <!-- !!! IMPORTANT: DO NOT REMOVE !!! -->
+        <span></span><span></span><span></span>
+        <ul id="menu">
+          <a href="index.html">Home</a>
+          <a href="updateHostelers.html">Update hostel masterdata</a>
+          <a href="uploadLeave.html">Update hosteler leave data</a>
+        </ul>
+      </div>
+    </nav>
+    <!-- NAVBAR HAMBURGER ENDS HERE. -->
     <h2>View attendance report:</h2>
     <div id="form-data">
       <form action="" method="post" enctype="multipart/form-data">
