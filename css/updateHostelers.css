@@ -5,6 +5,8 @@ h2 {
   padding: 0.5rem;
   background-color: var(--primary-bg);
   color: var(--primary-color);
+  font-family: 'akzidenz-grotesk';
+  src: url('fonts/Akzidenz-grotesk-black.ttf');
   border-bottom: 1px solid var(--primary-border);
   display: flex;
   justify-content: space-around;
