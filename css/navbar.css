@@ -9,7 +9,7 @@
 label .menu {
   position: absolute;
   right: -100px;
-  top: -100px;
+  top: -75px;
   z-index: 100;
   width: 200px;
   height: 200px;
