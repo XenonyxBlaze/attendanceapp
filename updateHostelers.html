@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Update Hosteler Information</title>
     <link rel="stylesheet" href="css/updateHostelers.css" />
     <link rel="stylesheet" href="css/root.css" />
     <link rel="stylesheet" href="css/report.css" />
     <link rel="stylesheet" href="css/navbar.css" />
-</head>
-<body>
-<!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
-<label>
-  <input type="checkbox" />
-  <span class="menu"> <span class="hamburger"></span> </span>
-  <ul>
-    <li id="h1"><a href="index.html">Home</a></li>
-    <li><a href="report.html">View Attendance Report</a></li>
-    <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
-    <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
-  </ul>
-</label>
-<div class="overlay"></div>
-<!-- NAVBAR HAMBURGER ENDS HERE. -->
-    <h2>Add Hosteler information</h2>
-    <form action="" method="post" enctype="multipart/form-data id="form">
-        <label for="id">Student ID: </label>
-        <input type="text" name="id" id="id"/>
-        <label for="name">Student name: </label>
-        <input type="text" name="name" id="name"/>
-        <label for="block">Block: </label>
-        <select name="block" id="block" required>
-            <option value="b1">Block - 1</option>
-            <option value="b2">Block - 2</option>
-            <option value="b3">Block - 3</option>
-            <option value="gh">Girls' Hostel</option>
-        </select>
-        <label for="roomnum">Room number: </label>
-        <input type="text" name="roomnum" id="roomnum"/>
-        <label for="files">Upload excel file/s :</label>
-        <input type="file" name="excelFile" id="file" accept=".xls, .xlsx"/>
-        <input type="submit" name="submit" value="Upload" id="submit"/>
-    </form>
-</body>
+    <link rel="stylesheet" href="css/header.css" />
+  </head>
+  <body>
+    <!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
+    <label>
+      <input type="checkbox" />
+      <span class="menu"> <span class="hamburger"></span> </span>
+      <ul>
+        <li id="h1"><a href="index.html">Home</a></li>
+        <li><a href="report.html">View Attendance Report</a></li>
+        <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
+        <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
+      </ul>
+    </label>
+    <div class="overlay"></div>
+    <!-- NAVBAR HAMBURGER ENDS HERE. -->
+    <header>
+      <div>
+        <img src="./img/logoblack.png" alt="VITLogo" />
+      </div>
+      <div id="center">
+        <p>Hostel attendance management system</p>
+        <p>[HAMS v0.3]</p>
+      </div>
+      <div></div>
+    </header>
+    <h2 id="title">Add Hosteler information</h2>
+    <div id="main-content">
+      <div id="left">
+        <form
+          action=""
+          method="post"
+          id="form-lrft"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="text"
+            name="id"
+            id="id"
+            placeholder="Registration Number"
+          />
+          <input type="text" name="name" id="name" placeholder="Student Name" />
+          <input type="text" name="roomnum" id="" placeholder="Room Number" />
+          <select name="SELECT BLOCK" id="">
+            <option value="bb1">Boys Block - 1</option>
+            <option value="bb2">Boys Block - 2</option>
+            <option value="bb3">Boys Block - 3</option>
+            <option value="gb1">Girls Block- 1</option>
+          </select>
+          <input type="submit" value="Update!" name="submit" />
+        </form>
+      </div>
+      <div id="right">
+        <form
+          action=""
+          method="post"
+          id="form-right"
+          enctype="multipart/form-data"
+        >
+          <div class="file-drop-area">
+            <span class="fake-btn">Upload updates from Excel</span>
+            <span class="file-msg">+</span>
+            <input
+              type="file"
+              name="tFiles[]"
+              id="tFiles"
+              accept=".xls, .xlsx"
+              class="file-input"
+              required
+            />
+          </div>
+          <input type="submit" value="Update!" name="submit" />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
-

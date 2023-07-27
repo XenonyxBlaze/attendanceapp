@@ -1,75 +1,108 @@
 @import url("./updateHostelers.css");
+@import url("./root.css");
 
 h2 {
   margin: 0;
-  padding: 0.5rem;
+  padding: 1rem 0;
   background-color: var(--primary-bg);
   color: var(--primary-color);
-  font-family: 'akzidenz-grotesk';
-  src: url('fonts/Akzidenz-grotesk-black.ttf');
+  font-family: "akzidenz-grotesk-roman";
   border-bottom: 1px solid var(--primary-border);
   display: flex;
   justify-content: space-around;
   font-size: 1.2rem;
   line-height: 1.5;
+  margin-bottom: 2rem;
 }
 
-form {
-  padding-left: 10%;
-}
-
-#downloadbtns,
-#blockbtns {
+#main-content {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
-  margin: 1rem auto;
+  width: 100%;
+  margin: 0 auto;
+}
+#left {
+  border-right: 1px solid var(--primary-border);
+}
+#left,
+#right {
+  width: 50%;
+}
+
+#form-right,
+#form-lrft {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3em;
+  height: 75vh;
   width: 70%;
+  margin: 0 auto;
 }
-
-#downloadbtns > *,
-#blockbtns > * {
-  width: 20%;
-  margin: 0;
-  padding: 0.5rem;
-  color: var(--primary-color);
-  font-weight: bold;
+#form-lrft > input,
+#form-lrft > select {
+  background-color: var(--secondary-color);
+  border: 0;
+  width: 90%;
+  padding: 2rem 6rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  margin-right: auto;
 }
-
-#downloadbtns > button,
-#blockbtns > button {
-  background-color: var(--primary-bg);
-  border: 1px solid var(--primary-border);
-  border-radius: 0.5rem;
+#form-lrft > select:focus-within {
+  border-radius: 2rem 2rem 0 0;
+}
+#form-lrft > input[type="submit"] {
+  width: fit-content;
   cursor: pointer;
 }
-
-#blockbtns {
-  width: 90%;
+#form-right {
+  gap: 10em;
 }
-
-#blockbtns > button {
-  width: 25%;
-  border-radius: 0.5rem 0.5rem 0 0;
-}
-
-table {
-  width: 90%;
+#form-right > input[type="submit"] {
+  background-color: var(--secondary-color);
+  cursor: pointer;
   margin: 0 auto;
-  border-collapse: collapse;
-  text-align: center;
+  border: 0;
+  width: fit-content;
+  padding: 2rem 6rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
 }
-td,
-th {
-  border: 1px solid var(--primary-border);
-  padding: 0.5rem;
+.file-drop-area {
+  background-color: var(--secondary-color);
+  position: relative;
+  display: flex;
+  border-radius: 3rem;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  max-width: 100%;
+  padding: 5rem;
+  margin: 0 auto;
 }
 
-th {
-  background-color: var(--secondary-bg);
-  color: var(--primary-color);
+.fake-btn {
+  font-size: 1.5rem;
 }
 
-tr:nth-of-type(2n + 1) {
-  background-color: var(--primary-bg);
-  color: var(--primary-color);
+.file-msg {
+  font-size: 2rem;
+  color: var(--accent-color);
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
 }
