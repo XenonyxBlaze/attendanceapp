@@ -4,12 +4,19 @@
     <title>VITB Hostel Attendance</title>
     <link rel="stylesheet" href="css/root.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
   </head>
   <body>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="updateHostelers.html">Update hostel masterdata</a>
-      <a href="uploadLeave.html">Update hosteler leave data</a>
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span><span></span><span></span>
+        <ul id="menu">
+          <a href="index.html">Home</a>
+          <a href="updateHostelers.html">Update hostel masterdata</a>
+          <a href="uploadLeave.html">Update hosteler leave data</a>
+        </ul>
+      </div>
     </nav>
     <h2>Upload Turnstile data:</h2>
     <form

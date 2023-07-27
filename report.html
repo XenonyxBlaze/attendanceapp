@@ -9,30 +9,41 @@
   </head>
   <body>
     <h2>View attendance report:</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-      <input type="text" name="name" id="filter-name" placeholder="Name" />
-      <input
-        type="text"
-        name="regno"
-        id="filter-regno"
-        placeholder="Registration Number"
-      />
-      <input type="date" name="date" id="filter-date" />
-      <select name="status" id="filter-status">
-        <option value="all">All</option>
-        <option value="present">Present</option>
-        <option value="absent">Absent</option>
-        <option value="onleave">On Leave</option>
-        <option value="leavebutreported">Leave But Reported</option>
-      </select>
-      <input type="submit" value="Go" />
-    </form>
+    <div id="form-data">
+      <form action="" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" id="filter-name" placeholder="Name" />
+        <input
+          type="text"
+          name="regno"
+          id="filter-regno"
+          placeholder="Registration Number"
+        />
+        <input type="date" name="date" id="filter-date" />
+        <select name="status" id="filter-status">
+          <option value="all">All</option>
+          <option value="present">Present</option>
+          <option value="absent">Absent</option>
+          <option value="onleave">On Leave</option>
+          <option value="leavebutreported">Leave But Reported</option>
+        </select>
+        <input type="submit" value="Go" />
+      </form>
+    </div>
     <div id="main-data">
       <div id="blockbtns">
-        <button>Boys Block-1</button>
-        <button>Boys Block-2</button>
-        <button>Boys Block-3</button>
-        <button>Girls Block-1</button>
+        <!-- <button>Boys Block-1</button> -->
+        <!-- <button>Boys Block-2</button> -->
+        <!-- <button>Boys Block-3</button> -->
+        <!-- <button>Girls Block-1</button> -->
+        <!-- Radio Buttons for this: -->
+        <input type="radio" name="block-selection" id="BHB1-radio" />
+        <label for="BHB1-radio">Boys Block-1</label>
+        <input type="radio" name="block-selection" id="BHB2-radio" />
+        <label for="BHB2-radio">Boys Block-2</label>
+        <input type="radio" name="block-selection" id="BHB3-radio" />
+        <label for="BHB3-radio">Boys Block-3</label>
+        <input type="radio" name="block-selection" id="GHB1-radio" />
+        <label for="GHB1-radio">Girls Block-1</label>
       </div>
       <div id="downloadbtns">
         <p>Download as:</p>
