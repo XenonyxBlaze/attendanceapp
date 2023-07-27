@@ -6,23 +6,34 @@
     <link rel="stylesheet" href="css/root.css" />
     <link rel="stylesheet" href="css/report.css" />
     <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/header.css" />
+
     <title>Attendance Report</title>
   </head>
   <body>
     <!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
-    <nav role="navigation">
-      <div id="menuToggle">
-        <input type="checkbox" />
-        <!-- !!! IMPORTANT: DO NOT REMOVE !!! -->
-        <span></span><span></span><span></span>
-        <ul id="menu">
-          <a href="index.html">Home</a>
-          <a href="updateHostelers.html">Update hostel masterdata</a>
-          <a href="uploadLeave.html">Update hosteler leave data</a>
-        </ul>
-      </div>
-    </nav>
+    <label>
+      <input type="checkbox" />
+      <span class="menu"> <span class="hamburger"></span> </span>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
+        <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
+      </ul>
+    </label>
+    <div class="overlay"></div>
     <!-- NAVBAR HAMBURGER ENDS HERE. -->
+    <header>
+      <div>
+        <img src="./img/logoblack.png" alt="VITLogo" />
+      </div>
+      <div id="center">
+        <p>Hostel attendance management system</p>
+        <p>[HAMS v0.3]</p>
+      </div>
+      <div></div>
+    </header>
+
     <h2>View attendance report:</h2>
     <div id="form-data">
       <form action="" method="post" enctype="multipart/form-data">
