@@ -11,16 +11,3 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
-nav {
-  background-color: var(--primary-bg);
-  color: var(--primary-color);
-  border-bottom: 1px solid var(--primary-border);
-  display: flex;
-  justify-content: space-around;
-}
-nav a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: bold;
-}
