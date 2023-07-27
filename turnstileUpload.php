@@ -56,7 +56,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         $checkpoint = $row[8];
 
-        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile_".$block."_".$timestamp."(ID varchar(255),Time varchar(255), Date varchar(255),Person_Group varchar(255),Attendance_Check_Point varchar(255),STATUS varchar(255));";
+        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile_".$block."_".$timestamp."(ID varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
 
         try {
             $conn->exec($createQuery);
