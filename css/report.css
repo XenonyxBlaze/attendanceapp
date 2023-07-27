@@ -27,8 +27,8 @@ h2 {
   background-color: var(--primary-bg);
   color: var(--primary-color);
   border-bottom: 1px solid var(--primary-border);
-  font-family: 'akzidenz-grotesk';
-  src: url('fonts/Akzidenz-grotesk-black.ttf');
+  font-family: "akzidenz-grotesk";
+  src: url("fonts/Akzidenz-grotesk-black.ttf");
   display: flex;
   justify-content: space-around;
   font-size: 1.2rem;
@@ -51,6 +51,9 @@ h2 {
   color: var(--primary-color);
   font-weight: bold;
 }
+#blockbtns > * {
+  color: var(--secondary-color);
+}
 
 #downloadbtns > button,
 #blockbtns > label {
@@ -66,7 +69,7 @@ h2 {
 }
 
 #blockbtns > label {
-  background-color: var(--secondary-bg);
+  background-color: var(--accent-color);
   width: 25%;
   border-radius: 0.5rem 0.5rem 0 0;
 }
@@ -103,11 +106,23 @@ th {
 }
 
 th {
-  background-color: var(--secondary-bg);
-  color: var(--primary-color);
+  background-color: var(--accent-color);
+  color: var(--white);
+  position: sticky;
+  top: 0;
 }
 
 tr:nth-of-type(2n + 1) {
-  background-color: var(--primary-bg);
-  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+#title {
+  padding: 2rem 0;
+  font-family: "akzidenz-grotesk-roman";
+  margin-bottom: 2rem;
+}
+
+#tableview {
+  overflow: scroll;
+  height: 50vh;
 }
