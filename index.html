@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <title>VITB Hostel Attendance</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="uploadHostelers.html">Update hostel masterdata</a>
+        <a href="uploadLeave.html">Update hosteler leave data</a>
+    </nav>
+    <h2>Upload Turnstile data:</h2>
+    <form action="turnstileUpload.php" method="post" enctype="multipart/form-data">
+        <label for="tFiles">Select Excel files to upload:</label>
+        <input type="file" name="tFiles[]" id="tFiles" multiple accept=".xls, .xlsx" required>
+        <input type="submit" value="Fetch" name="submit" id="submit" >
+    </form>
+
+    
+
+
+</body>
+</html>
