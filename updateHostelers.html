@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Hosteler Information</title>
+</head>
+<body>
+
+    <h2>Add Hosteler information</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        <label for="id">Student ID: </label>
+        <input type="text" name="id" id="id"/>
+        <label for="name">Student name: </label>
+        <input type="text" name="name" id="name"/>
+        <label for="block">Block: </label>
+        <select name="block" id="block" required>
+            <option value="b1">Block - 1</option>
+            <option value="b2">Block - 2</option>
+            <option value="b3">Block - 3</option>
+            <option value="gh">Girls' Hostel</option>
+        </select>
+        <label for="roomnum">Room number: </label>
+        <input type="text" name="roomnum" id="roomnum"/>
+        <label for="files">Upload excel file/s :</label>
+        <input type="file" name="excelFile" id="file" accept=".xls, .xlsx"/>
+        <input type="submit" name="submit" value="Upload" id="submit"/>
+    </form>
+</body>
+</html>
+

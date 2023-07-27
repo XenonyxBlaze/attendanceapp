@@ -1,0 +1,8 @@
+
+uploads/**/*
+!uploads/*
+vendor/*
+vendor/
+.vscode/
+.vscode/*
+```
