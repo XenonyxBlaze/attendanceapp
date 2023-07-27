@@ -101,6 +101,8 @@ label ul {
 label a {
   margin-bottom: 1em;
   display: block;
-  color: #f38630;
+  font-family: 'akzidenz-grotesk';
+  src: url('fonts/Akzidenz-grotesk-black.ttf');
+  color: #e8e8e8;
   text-decoration: none;
 }
