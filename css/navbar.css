@@ -83,10 +83,11 @@ label input:checked + .menu .hamburger:before {
 
 label input:checked + .menu + ul {
   opacity: 1;
+  z-index: 200 !important;
 }
 
 label ul {
-  z-index: 200;
+  z-index: -10;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -101,8 +102,17 @@ label ul {
 label a {
   margin-bottom: 1em;
   display: block;
-  font-family: 'akzidenz-grotesk';
-  src: url('fonts/Akzidenz-grotesk-black.ttf');
+  font-family: "akzidenz-grotesk-black";
   color: #e8e8e8;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: 1em 7em;
+  font-size: xx-large;
+  text-align: center;
+}
+
+label a:hover {
+  scale: 1.2;
+  transition: all 0.2s ease-in-out;
 }
