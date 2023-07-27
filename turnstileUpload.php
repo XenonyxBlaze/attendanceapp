@@ -67,10 +67,10 @@ function sqlTurnstile($reader, $tFile, $conn) {
     }
 
     if($insertions+$notStudent == count($records)) {
-        echo $tFile." uploaded successfully<br>Not student: $notStudent";
+        echo $tFile." uploaded successfully<br>";
         return true;
     } else {
-        echo "Error uploading ".$tFile."<br>Insertions: ".$insertions."<br>Records: ".count($records)."<br>";
+        echo "Error uploading ".$tFile."<br>";
         return false;
     }
 }
@@ -115,3 +115,7 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
         echo $fileName." is not an Excel file. Skipping<br>";
     }
 }
+
+$conn = null;
+
+header('Location: report.php');
