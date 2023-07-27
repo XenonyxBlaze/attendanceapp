@@ -27,6 +27,8 @@ h2 {
   background-color: var(--primary-bg);
   color: var(--primary-color);
   border-bottom: 1px solid var(--primary-border);
+  font-family: 'akzidenz-grotesk';
+  src: url('fonts/Akzidenz-grotesk-black.ttf');
   display: flex;
   justify-content: space-around;
   font-size: 1.2rem;

@@ -1,20 +1,24 @@
 :root {
-  --primary-bg: #eee;
-  --secondary-bg: #aaa;
-  --primary-color: #333;
-  --secondary-color: #666;
-  --accent-color: #a00;
+  --primary-bg: #e8e8e8;
+  --secondary-bg: #d3cef8;
+  --primary-color: #3c3c3c;
+  --secondary-color: #d9d9d9;
+  --accent-color: #737373;
   --primary-border: #ccc;
   --secondary-border: #bbb;
-  --white: #fff;
-  --black: #000;
+  --white: #e8e8e8;
+  --black: #0a0a0a;
+
+  --dark-text: #fafafa;
+  --dark-background: #050505;
+  --dark-primary: #a3a3a3;
+  --dark-secondary: #1a1a1a;
+  --dark-accent: #b3b3b3;
 }
 body {
   margin: 0;
   padding: 0;
   font-family: 'akzidenz-grotesk', sans-serif;
-  src: url('fonts/Akzidenz-grotesk-light.ttf');
-
   flex-direction: column;
   min-height: 100vh;
 }
