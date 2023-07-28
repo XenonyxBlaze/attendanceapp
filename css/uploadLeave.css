@@ -1,19 +1,5 @@
 @import url("./root.css");
 
-h2 {
-  margin: 0;
-  padding: 1rem 0;
-  background-color: var(--primary-bg);
-  color: var(--primary-color);
-  font-family: "akzidenz-grotesk-roman";
-  border-bottom: 1px solid var(--primary-border);
-  display: flex;
-  justify-content: space-around;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-}
-
 #main-content {
   display: flex;
   flex-direction: row;
@@ -33,7 +19,7 @@ h2 {
 #form-lrft {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 3em;
   height: 75vh;
   width: 70%;
