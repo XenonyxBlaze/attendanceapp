@@ -2,18 +2,16 @@
 
 session_start();
 
-if(isset($_SESSION['report'])) {
-  $report = $_SESSION['report'];
-} else {
+if(!isset($_SESSION['report'])) {
+  header('Location: genView.php');
+} elseif(empty($_SESSION['report'])) {
   $report = array();
+} else {
+  $report = $_SESSION['report'];
 }
 
 // foreach($report as $row){
 //   echo $row[0]."<br>";
-// }
-
-// if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'GET') {
-//   header('Location: genView.php');
 // }
 
 ?>
@@ -71,7 +69,8 @@ if(isset($_SESSION['report'])) {
           <option value="present">Present</option>
           <option value="absent">Absent</option>
           <option value="onleave">On Leave</option>
-          <option value="leavebutreported">Leave But Reported</option>
+          <option value="reported">Leave But Reported</option>
+          <option value="new entry">New Entry</option>
         </select>
         <input type="submit" value="Go" />
       <!-- </form> -->
@@ -103,6 +102,10 @@ if(isset($_SESSION['report'])) {
             <th>Status</th>
           </tr>
           <?php
+          if (count($report) == 0) {
+            echo "<tr><td colspan=\"3\">No data to display</td></tr>";
+          }
+
           foreach($report as $row){
             echo "<tr>";
             echo "<td>".$row[0]."</td>";
@@ -121,5 +124,29 @@ if(isset($_SESSION['report'])) {
       });
       $('#filter-date').val(new Date().toISOString().slice(0,10));
     </script>
+
+    <?php
+
+      if(isset($_SESSION['block'])) {
+        echo "<script>$('#".$_SESSION['block']."-radio').prop('checked', true);</script>";
+      }
+
+      if(isset($_SESSION['status'])) {
+        echo "<script>$('#filter-status').val('".$_SESSION['status']."');</script>";
+      }
+
+      if(isset($_SESSION['regno'])) {
+        echo "<script>$('#filter-regno').val('".$_SESSION['regno']."');</script>";
+      }
+
+      if(isset($_SESSION['name'])) {
+        echo "<script>$('#filter-name').val('".$_SESSION['name']."');</script>";
+      }
+
+      if(isset($_SESSION['date'])) {
+        echo "<script>$('#filter-date').val('".$_SESSION['date']."');</script>";
+      }
+
+    ?>
   </body>
 </html>

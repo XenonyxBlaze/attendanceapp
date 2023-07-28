@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $sqlServer = "localhost:3306";
 $sqlUser = "root";
@@ -31,18 +32,27 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     if(isset($_POST['name']) && $_POST['name'] != "") {
-        $nameFilter = "Name LIKE \"".$_POST['name']."\"";
+        $nameFilter = "Name LIKE \"%".$_POST['name']."%\"";
+        $_SESSION['name']=$_POST['name'];
         array_push($filters, $nameFilter);
+    } else {
+        $_SESSION['name']='';
     }
     
-    if(isset($_POST['id']) && $_POST['id'] != "") {
-        $idFilter = "ID LIKE \"".$_POST['id']."\"";
+    if(isset($_POST['regno']) && $_POST['regno'] != "") {
+        $idFilter = "ID LIKE \"".$_POST['regno']."\"";
+        $_SESSION['regno']=$_POST['regno'];
         array_push($filters, $idFilter);
+    } else {
+        $_SESSION['regno']='';
     }
     
     if(isset($_POST['status']) && $_POST['status'] != "" && $_POST['status'] != "All") {
         $statusFilter = "Status LIKE \"".$_POST['status']."\"";
+        $_SESSION['status']=$_POST['status'];
         array_push($filters, $statusFilter);
+    } else {
+        $_SESSION['status']='All';
     }
 }
 
@@ -67,7 +77,8 @@ function returnFilterConstraints($filters) {
 $reportTable = "report".$block.$date;
 
 if(!reportExists($conn, $reportTable)) {
-    echo "No records found for the given date";
+    $_SESSION['report'] = array();
+    header("Location: report.php");
     die;
 }
 
@@ -75,16 +86,18 @@ $filterConstraints = returnFilterConstraints($filters);
 
 $reportQuery = "SELECT * FROM $reportTable $filterConstraints";
 
-
 $report = $conn->query($reportQuery)->fetchAll();
 
-session_start();
 
 $_SESSION['report'] = $report;
+
+$_SESSION['block'] = $block;
+
+echo "Date: ".strtotime($date);
 
 // foreach($report as $row){
 //     echo $row[0]."<br>";
 // }
 
-header("Location: report.php");
+// header("Location: report.php");
 
