@@ -2,7 +2,7 @@
 
 -Present and absent color change
 
--turnstile data CLEAR AFTER EVERY SESSION 
+-turnstile data CLEAR AFTER EVERY SESSION
 
 -Present, abssent, leave, leave but reported, New entry - Present/Absent/Leave/Leave but reported
 
