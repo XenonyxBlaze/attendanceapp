@@ -39,23 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $roomnum = $_POST['roomnum'];
 
         // SQL query
-        switch($block) {
-            case 'b1':
-                $sqlQuerry = "INSERT INTO boysblock1(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                break;
-            case 'b2':
-                $sqlQuerry = "INSERT INTO boysblock2(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                break;
-            case 'b3':
-                $sqlQuerry = "INSERT INTO boysblock3(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                break;
-            case 'gh':
-                $sqlQuerry = "INSERT INTO girlsblock1(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                break;
-            default:
-                echo "Invalid block";
-                break;
-        }
+        
+        $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
 
         try {
             $conn->exec($sqlQuerry);
@@ -73,27 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($sheetData as $row) {
             $id = $row['A'];
             $name = $row['B'];
-            $block = $row['C'];
-            $roomnum = $row['D'];
+            $roomnum = $row['C'];
 
             // SQL query
-            switch($block) {
-                case 'b1':
-                    $sqlQuerry = "INSERT INTO boysblock1(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                    break;
-                case 'b2':
-                    $sqlQuerry = "INSERT INTO boysblock2(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                    break;
-                case 'b3':
-                    $sqlQuerry = "INSERT INTO boysblock3(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                    break;
-                case 'gh':
-                    $sqlQuerry = "INSERT INTO girlsblock1(ID, Name, Block, Room_Number) VALUES (\"$id\",\"$name\",\"$block\",\"$roomnum\")";
-                    break;
-                default:
-                    echo "Invalid block";
-                    break;
-            }
+            $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
 
             try {
                 $conn->exec($sqlQuerry);
@@ -101,9 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } catch(PDOException $e) {
                 echo "Error : " . $e->getMessage()."<br>";
             }
-
+            
         }
     }
+    
+    header("Location: updateHostelers.html");
 
 }
 
