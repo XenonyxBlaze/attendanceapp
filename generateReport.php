@@ -1,6 +1,13 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 $date = date("dmY",time());
+
+$reportTable = $_SESSION['reportTable'];
+$_SESSION['reportTable'] = $reportTable;
 
 // SQL config
 $sqlServer = "localhost:3306";
@@ -82,6 +89,37 @@ foreach($tables as $table) {
         echo $reportGenQuery."<br>";
         echo "Error : " . $e->getMessage()."<br>";
     }
+
+    $fetchReport = "SELECT * FROM $reportTable";
+
+    $report = $conn->query($fetchReport)->fetchAll();
+
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    $sheet->setCellValue('A1', 'ID');
+    $sheet->setCellValue('B1', 'Name');
+    $sheet->setCellValue('C1', 'Status');
+
+    for($i = 0; $i < count($report); $i++) {
+        $sheet->setCellValue('A'.($i+2), $report[$i][0]);
+        $sheet->setCellValue('B'.($i+2), $report[$i][1]);
+        $sheet->setCellValue('C'.($i+2), $report[$i][2]);
+    }
+
+    $filePath='uploads\reports\\'.$reportTable;
+    
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+
+    $writer->save($filePath.'.xlsx');
+
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Csv($spreadsheet);
+
+    $writer->save($filePath.'.csv');
+
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Tcpdf($spreadsheet);
+
+    $writer->save($filePath.'.pdf');
 
 }
 

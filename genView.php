@@ -99,6 +99,8 @@ $_SESSION['block'] = $block;
 
 $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
 
+$_SESSION['reportTable'] = $reportTable;
+
 
 // foreach($report as $row){
 //     echo $row[0]."<br>";

@@ -123,6 +123,26 @@ if(!isset($_SESSION['report'])) {
         $("#viewform").submit();
       });
       $('#filter-date').val(new Date().toISOString().slice(0,10));
+
+      // Download records
+      $('#download-as-Excel').click(function() {
+        // Send get request to download.php with filetype=excel
+        
+        window.location.href = "download.php"+'?filetype=excel';
+      });
+
+      $('#download-as-CSV').click(function() {
+        // Send post request to download.php with filetype=csv
+        
+        window.location.href = "download.php"+'?filetype=csv';
+      });
+
+      $('#download-as-PDF').click(function() {
+        // Send post request to download.php with filetype=pdf
+        window.location.href = "download.php"+'?filetype=pdf';
+
+      });
+
     </script>
 
     <?php
