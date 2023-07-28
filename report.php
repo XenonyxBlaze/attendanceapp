@@ -78,14 +78,14 @@ if(!isset($_SESSION['report'])) {
     <div id="main-data">
       <div id="blockbtns">
         <!-- <form action="genView.php" method="POST" enctype="multipart/form-data"> -->
-          <input type="radio" name="block" id="BHB1-radio" value="b1" checked />
-          <label for="BHB1-radio">Boys Block-1</label>
-          <input type="radio" name="block" id="BHB2-radio" value="b2" />
-          <label for="BHB2-radio">Boys Block-2</label>
-          <input type="radio" name="block" id="BHB3-radio" value="b3" />
-          <label for="BHB3-radio">Boys Block-3</label>
-          <input type="radio" name="block" id="GHB1-radio" value="gh" />
-          <label for="GHB1-radio">Girls Block-1</label>
+          <input type="radio" name="block" id="B1-radio" value="b1" checked />
+          <label for="B1-radio">Boys Block-1</label>
+          <input type="radio" name="block" id="B2-radio" value="b2" />
+          <label for="B2-radio">Boys Block-2</label>
+          <input type="radio" name="block" id="B3-radio" value="b3" />
+          <label for="B3-radio">Boys Block-3</label>
+          <input type="radio" name="block" id="GH-radio" value="gh" />
+          <label for="GH-radio">Girls Block-1</label>
         </form>
       </div>
       <div id="downloadbtns">
@@ -128,7 +128,7 @@ if(!isset($_SESSION['report'])) {
     <?php
 
       if(isset($_SESSION['block'])) {
-        echo "<script>$('#".$_SESSION['block']."-radio').prop('checked', true);</script>";
+        echo "<script>$('#".strtoupper($_SESSION['block'])."-radio').prop('checked', true);</script>";
       }
 
       if(isset($_SESSION['status'])) {

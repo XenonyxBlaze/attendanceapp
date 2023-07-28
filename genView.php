@@ -78,6 +78,10 @@ $reportTable = "report".$block.$date;
 
 if(!reportExists($conn, $reportTable)) {
     $_SESSION['report'] = array();
+    
+    $_SESSION['block'] = $block;
+
+    $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
     header("Location: report.php");
     die;
 }
@@ -93,11 +97,12 @@ $_SESSION['report'] = $report;
 
 $_SESSION['block'] = $block;
 
-echo "Date: ".strtotime($date);
+$_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
+
 
 // foreach($report as $row){
 //     echo $row[0]."<br>";
 // }
 
-// header("Location: report.php");
+header("Location: report.php");
 
