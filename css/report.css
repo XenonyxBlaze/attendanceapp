@@ -121,7 +121,7 @@ tr:nth-of-type(2n + 1) {
 }
 
 #tableview {
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: 50vh;
 }
