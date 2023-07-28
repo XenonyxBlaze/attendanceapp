@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $status = $row['B'];
 
             // SQL query
-            $sqlQuerry = "INSERT INTO onleave(ID, Status) VALUES (\"$id\",\"$status\")";
+            $sqlQuerry = "INSERT INTO onleave(ID, Status) VALUES (\"$id\",\"$status                                                             \")";
 
             try {
                 $conn->exec($sqlQuerry);
