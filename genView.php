@@ -21,21 +21,26 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $date = date("dmY",time());
     $block = "b1";
 } elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $date = $_POST['date'];
-    echo $date;
     $block = $_POST['block'];
     
-    if($_POST['name'] != "") {
+    if(isset($_POST['date']) && $_POST['date'] != "") {
+        $date = $_POST['date'];
+        $date = date('dmY',strtotime($date));
+    } else {
+        $date = date("dmY",time());
+    }
+
+    if(isset($_POST['name']) && $_POST['name'] != "") {
         $nameFilter = "Name LIKE \"".$_POST['name']."\"";
         array_push($filters, $nameFilter);
     }
     
-    if($_POST['id'] != "") {
+    if(isset($_POST['id']) && $_POST['id'] != "") {
         $idFilter = "ID LIKE \"".$_POST['id']."\"";
         array_push($filters, $idFilter);
     }
     
-    if($_POST['status'] != "") {
+    if(isset($_POST['status']) && $_POST['status'] != "" && $_POST['status'] != "All") {
         $statusFilter = "Status LIKE \"".$_POST['status']."\"";
         array_push($filters, $statusFilter);
     }
@@ -70,11 +75,16 @@ $filterConstraints = returnFilterConstraints($filters);
 
 $reportQuery = "SELECT * FROM $reportTable $filterConstraints";
 
+
 $report = $conn->query($reportQuery)->fetchAll();
 
 session_start();
 
 $_SESSION['report'] = $report;
+
+// foreach($report as $row){
+//     echo $row[0]."<br>";
+// }
 
 header("Location: report.php");
 

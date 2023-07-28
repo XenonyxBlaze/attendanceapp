@@ -2,7 +2,19 @@
 
 session_start();
 
-$report = $_SESSION['report'];
+if(isset($_SESSION['report'])) {
+  $report = $_SESSION['report'];
+} else {
+  $report = array();
+}
+
+// foreach($report as $row){
+//   echo $row[0]."<br>";
+// }
+
+// if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'GET') {
+//   header('Location: genView.php');
+// }
 
 ?>
 
@@ -25,7 +37,7 @@ $report = $_SESSION['report'];
       <span class="menu"> <span class="hamburger"></span> </span>
       <ul>
         <li id="h1"><a href="index.html">Home</a></li>
-        <li><a href="report.html">View Attendance Report</a></li>
+        <li><a href="report.php">View Attendance Report</a></li>
         <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
         <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
       </ul>
@@ -45,7 +57,7 @@ $report = $_SESSION['report'];
 
     <h2 id="title">View attendance report:</h2>
     <div id="form-data">
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="genView.php" method="post" enctype="multipart/form-data" id="viewform">
         <input type="text" name="name" id="filter-name" placeholder="Name" />
         <input
           type="text"
@@ -55,25 +67,25 @@ $report = $_SESSION['report'];
         />
         <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
-          <option value="all">All</option>
+          <option value="All">All</option>
           <option value="present">Present</option>
           <option value="absent">Absent</option>
           <option value="onleave">On Leave</option>
           <option value="leavebutreported">Leave But Reported</option>
         </select>
         <input type="submit" value="Go" />
-      </form>
+      <!-- </form> -->
     </div>
     <div id="main-data">
       <div id="blockbtns">
-        <form action="genView.php" method="POST" enctype="multipart/form-data">
-          <input type="radio" name="block-selection" id="BHB1-radio" value="b1" checked />
+        <!-- <form action="genView.php" method="POST" enctype="multipart/form-data"> -->
+          <input type="radio" name="block" id="BHB1-radio" value="b1" checked />
           <label for="BHB1-radio">Boys Block-1</label>
-          <input type="radio" name="block-selection" id="BHB2-radio" value="b2" />
+          <input type="radio" name="block" id="BHB2-radio" value="b2" />
           <label for="BHB2-radio">Boys Block-2</label>
-          <input type="radio" name="block-selection" id="BHB3-radio" value="b3" />
+          <input type="radio" name="block" id="BHB3-radio" value="b3" />
           <label for="BHB3-radio">Boys Block-3</label>
-          <input type="radio" name="block-selection" id="GHB1-radio" value="gh" />
+          <input type="radio" name="block" id="GHB1-radio" value="gh" />
           <label for="GHB1-radio">Girls Block-1</label>
         </form>
       </div>
@@ -102,5 +114,12 @@ $report = $_SESSION['report'];
         </table>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+    <script>
+      $('input[type="radio"]').click(function() {
+        $("#viewform").submit();
+      });
+      $('#filter-date').val(new Date().toISOString().slice(0,10));
+    </script>
   </body>
 </html>
