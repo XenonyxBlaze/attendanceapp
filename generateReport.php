@@ -24,11 +24,23 @@ if(count($tables) == 0) {
     die;
 }
 
+function tableExists($conn, $table) {
+    $result = $conn->query("SHOW TABLES LIKE '$table'");
+    $result = $result->fetchAll(PDO::FETCH_COLUMN);
+    return count($result) > 0;
+}
+
 foreach($tables as $table) {
 
     $reportTable = "report".substr($table,9);
 
     $block = substr($table,9,2);
+
+    $reportExists = tableExists($conn, $reportTable);
+
+    if($reportExists) {
+        $conn->exec("DROP TABLE $reportTable");
+    }
 
     $createReportQuery = "CREATE TABLE IF NOT EXISTS ".$reportTable."(ID VARCHAR(255) NOT NULL PRIMARY KEY, NAME VARCHAR(255), STATUS VARCHAR(255));";
 
@@ -64,6 +76,13 @@ foreach($tables as $table) {
     ON DUPLICATE KEY UPDATE Status = VALUES(Status);
     ";
 
-    echo $reportGenQuery."<br>";
+    try {
+        $conn->exec($reportGenQuery);
+    } catch(PDOException $e) {
+        echo $reportGenQuery."<br>";
+        echo "Error : " . $e->getMessage()."<br>";
+    }
+
 }
 
+header('Location: genView.php');
