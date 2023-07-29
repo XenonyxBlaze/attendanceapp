@@ -63,6 +63,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($sheetNames as $sheetName){
                 echo $sheetName."<br>";
             }
+        } else {
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheetData = $sheet->toArray(null, true, true, true);
+            foreach ($sheetData as $row) {
+                $id = $row['A'];
+                $name = $row['B'];
+                $roomnum = $row['C'];
+                $block = $row['D'];
+
+                // SQL query
+                $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
+                try {
+                    $conn->exec($sqlQuerry);
+                    echo "Hosteler information uploaded successfully<br>";
+                } catch(PDOException $e) {
+                    echo "Error : " . $e->getMessage()."<br>";
+                }
+            }
         }
 
     }
