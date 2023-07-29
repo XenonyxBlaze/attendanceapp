@@ -39,11 +39,7 @@ if (isset($_SESSION['errors'])){
         <li id="h1"><a href="index.html">Home</a></li>
         <li><a href="report.php">View Today's Attendance Report</a></li>
         <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-<<<<<<< HEAD
         <li><a href="previousReport.php">View Previous Reports</a></li>
-=======
-        <li><a href="pastReport.html">View Previous Reports</a></li>
->>>>>>> 4bf8fc4dc5dc9dd7fa6aca50dbe0537ae657f5b0
         <li><a href="UploadHostelers.html">Upload hostel masterdata</a></li>
         <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
