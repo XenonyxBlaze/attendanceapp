@@ -39,6 +39,7 @@ if (isset($_SESSION['errors'])){
         <li id="h1"><a href="index.html">Home</a></li>
         <li><a href="report.php">View Attendance Report</a></li>
         <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
+        <li><a href="pastReport.html">View Previous Reports</a></li>
         <li><a href="UploadHostelers.html">Upload hostel masterdata</a></li>
         <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
