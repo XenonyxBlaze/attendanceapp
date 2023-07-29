@@ -9,7 +9,7 @@ $reader = new Xlsx();
 // SQL config
 $sqlServer = "localhost:3306";
 $sqlUser = "root";
-$sqlPass = "toor";
+$sqlPass = "";
 
 try {
     $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
@@ -39,7 +39,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
         $id = strtoupper($row[1]);
 
         $name = $row[0];
-        
+
         if (!preg_match("/^\d{2}[a-zA-Z]{3}\d{5}$/",$id)) {
             $notStudent++;
             continue;
@@ -65,7 +65,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
             echo $createQuery."<br>";
             echo "Error : " . $e->getMessage()."<br>";
         }
-    
+
         $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
 
         try {
