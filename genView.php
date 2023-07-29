@@ -3,7 +3,7 @@ session_start();
 
 $sqlServer = "localhost:3306";
 $sqlUser = "root";
-$sqlPass = "toor";
+$sqlPass = "";
 
 try {
     $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
