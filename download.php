@@ -8,6 +8,10 @@ if(!isset($_GET['filetype'])){
 
 $filetype = $_GET['filetype'];
 
+if(!isset($_SESSION['reportTable'])){
+    header('Location: report.php');
+}
+
 $file = 'uploads/reports/'.$_SESSION['reportTable'];
 
 if($filetype == 'excel') {

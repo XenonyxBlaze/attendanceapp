@@ -73,7 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    header("Location: updateHostelers.html");
+
+    session_start();
+    $_SESSION['redir']="main";
+    
+    header("Location: generateReport.html");
 
 }
 

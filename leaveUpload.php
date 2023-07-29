@@ -69,7 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    header("Location: uploadLeave.html");
+    session_start();
+    $_SESSION['redir']='leave';
+
+    header("Location: generateReport.php");
 
 }
 

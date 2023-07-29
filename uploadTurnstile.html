@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/root.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- NAVBAR RELATED CSS -->
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <label>
+        <input type="checkbox" />
+        <span class="menu"> <span class="hamburger"></span> </span>
+        <ul>
+          <li id="h1"><a href="index.html">Home</a></li>
+          <li><a href="report.php">View Attendance Report</a></li>
+          <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
+          <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
+        </ul>
+    </label>
+    <div class="overlay"></div>
+    <!-- NAVBAR HAMBURGER ENDS HERE. -->
+    <header>
+    <div>
+        <img src="./img/logoblack.png" alt="VITLogo" />
+    </div>
+    <div id="center">
+        <p>Hostel attendance management system</p>
+        <p>[HAMS v0.3]</p>
+    </div>
+    <div></div>
+    </header>
+    <div class="main-content">
+        <form
+        action="turnstileUpload.php"
+        method="post"
+        enctype="multipart/form-data"
+        >
+            <div class="file-drop-area">
+                <span class="fake-btn">Upload Turnstile files</span>
+                <span class="file-msg">+</span>
+                <input
+                type="file"
+                name="tFiles[]"
+                id="tFiles"
+                multiple="multiple"
+                accept=".xls, .xlsx"
+                class="file-input"
+                required
+                />
+            </div>
+            <input type="submit" value="Fetch Data!" name="submit" id="submit" />
+        </form>
+    </div>
+    <script>
+        var $fileInput = $(".file-input");
+        var $droparea = $(".file-drop-area");
+
+        // highlight drag area
+        $fileInput.on("dragenter focus click", function () {
+        $droparea.addClass("is-active");
+        });
+
+        // back to normal state
+        $fileInput.on("dragleave blur drop", function () {
+        $droparea.removeClass("is-active");
+        });
+
+        // change inner text
+        $fileInput.on("change", function () {
+        var filesCount = $(this)[0].files.length;
+        var $textContainer = $(this).prev();
+
+        if (filesCount === 1) {
+            // if single file is selected, show file name
+            var fileName = $(this).val().split("\\").pop();
+            $textContainer.text(fileName);
+        } else {
+            // otherwise show number of files
+            $textContainer.text(filesCount + " files selected");
+        }
+        });
+    </script>
+</body>
+</html>

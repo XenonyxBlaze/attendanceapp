@@ -34,62 +34,15 @@
       <div></div>
     </header>
     <div id="main-content">
-      <form
-        action="turnstileUpload.php"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <p>
-          Upload the Turnstile data by clicking the button below, or drag and
-          drop the file into the designated area. <br />Please ensure that the
-          file you are uploading follows the required format and contains the
-          necessary data fields for the Turnstile data processing to be
-          successful.
-        </p>
-        <div class="file-drop-area">
-          <span class="fake-btn">Upload files</span>
-          <span class="file-msg">+</span>
-          <input
-            type="file"
-            name="tFiles[]"
-            id="tFiles"
-            multiple="multiple"
-            accept=".xls, .xlsx"
-            class="file-input"
-            required
-          />
-        </div>
-        <input type="submit" value="Fetch Data!" name="submit" id="submit" />
-      </form>
+      
+      <p>
+        Upload the Turnstile data by clicking the button below, or drag and
+        drop the file into the designated area. <br />Please ensure that the
+        file you are uploading follows the required format and contains the
+        necessary data fields for the Turnstile data processing to be
+        successful.
+      </p>
     </div>
-    <script>
-      var $fileInput = $(".file-input");
-      var $droparea = $(".file-drop-area");
-
-      // highlight drag area
-      $fileInput.on("dragenter focus click", function () {
-        $droparea.addClass("is-active");
-      });
-
-      // back to normal state
-      $fileInput.on("dragleave blur drop", function () {
-        $droparea.removeClass("is-active");
-      });
-
-      // change inner text
-      $fileInput.on("change", function () {
-        var filesCount = $(this)[0].files.length;
-        var $textContainer = $(this).prev();
-
-        if (filesCount === 1) {
-          // if single file is selected, show file name
-          var fileName = $(this).val().split("\\").pop();
-          $textContainer.text(fileName);
-        } else {
-          // otherwise show number of files
-          $textContainer.text(filesCount + " files selected");
-        }
-      });
-    </script>
+        
   </body>
 </html>
