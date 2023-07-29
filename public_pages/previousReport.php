@@ -40,7 +40,7 @@ if (isset($_SESSION['errors'])){
         <li><a href="report.php">View Today's Attendance Report</a></li>
         <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="previousReport.php">View Previous Reports</a></li>
-        <li><a href="UploadHostelers.html">Upload hostel masterdata</a></li>
+        <li><a href="uploadHostelers.html">Upload hostel masterdata</a></li>
         <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
     </label>
@@ -143,7 +143,7 @@ if (isset($_SESSION['errors'])){
 
       $('#download-as-CSV').click(function() {
         // Send post request to download.php with filetype=csv
-        
+
         window.location.href = "download.php"+'?filetype=csv';
       });
 
