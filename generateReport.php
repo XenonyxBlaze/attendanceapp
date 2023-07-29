@@ -89,7 +89,7 @@ foreach($tables as $table) {
     ) AS latest_turnstile
     ON m.ID = latest_turnstile.ID
     LEFT JOIN onleave AS l ON m.ID = l.ID
-    ON DUPLICATE KEY UPDATE Status = VALUES(Status);
+    ON DUPLICATE KEY Upload Status = VALUES(Status);
     ";
 
     try {

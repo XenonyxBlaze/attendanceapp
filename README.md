@@ -6,7 +6,7 @@ Welcome to the VIT Bhopal Hostel Attendance Integrator! This project is assigned
 
 ## 📝 Project Description
 
-The VIT Bhopal Hostel Attendance Integrator streamlines the attendance management process by effectively combining biometric turnstile data with the university's student-staff portal. The system is designed to handle large volumes of data efficiently, providing real-time attendance updates and ensuring accurate records. This project also undertakes the concepts of data analysis and processing in order to ease up human-oriented tasks.
+The VIT Bhopal Hostel Attendance Integrator streamlines the attendance management process by effectively combining biometric turnstile data with the university's student-staff portal. The system is designed to handle large volumes of data efficiently, providing real-time attendance Uploads and ensuring accurate records. This project also undertakes the concepts of data analysis and processing in order to ease up human-oriented tasks.
 
 ## ⚙️ Technologies Used
 
