@@ -133,5 +133,8 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
 
 $conn = null;
 
+session_start();
+$_SESSION['redir']='turnstile';
+
 header('Location: generateReport.php');
 

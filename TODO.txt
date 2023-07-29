@@ -8,4 +8,9 @@
 
 -Historical data diffrent section
 
--report exclusively for current date
+-report exclusively for current date'
+
+
+- fetch dates for table namess from excel file only
+
+- 

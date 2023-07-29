@@ -4,10 +4,19 @@ require_once 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-$date = date("dmY",time());
 
-$reportTable = $_SESSION['reportTable'];
-$_SESSION['reportTable'] = $reportTable;
+session_start();
+
+if(!isset($_SESSION['redir'])) {
+    header('Location: genView.php');
+}
+$redir = $_SESSION['redir'];
+if(isset($_SESSION['errors'])){
+    $errors = $_SESSION['errors'];
+}
+session_reset();
+
+$date = date("dmY",time());
 
 // SQL config
 $sqlServer = "localhost:3306";
@@ -123,4 +132,13 @@ foreach($tables as $table) {
 
 }
 
-header('Location: genView.php');
+switch($redir){
+    case 'main':
+        header('Location: uploadHostelers.html');
+        break;
+    case 'leave':
+        header('Location: uploadLeave.html');
+        break;
+    case 'turnstile':
+        header('Location: uploadTurnstile.html');
+}
