@@ -4,3 +4,4 @@ vendor/*
 vendor
 .vscode
 .vscode/*
+.idea
