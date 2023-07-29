@@ -8,13 +8,8 @@ if(!isset($_SESSION['report'])) {
   $report = array();
 } else {
   $report = $_SESSION['report'];
+  session_reset();
 }
-if (isset($_SESSION['errors'])){
-  $errors = $_SESSION['errors'];
-}
-// foreach($report as $row){
-//   echo $row[0]."<br>";
-// }
 
 ?>
 
@@ -49,7 +44,7 @@ if (isset($_SESSION['errors'])){
     <!-- NAVBAR HAMBURGER ENDS HERE. -->
     <header>
       <div>
-        <img src="./img/logoblack.png" alt="VITLogo" />
+        <img src="../img/logoblack.png" alt="VITLogo" />
       </div>
       <div id="center">
         <p font="akz">Hostel attendance management system</p>
@@ -128,12 +123,11 @@ if (isset($_SESSION['errors'])){
       $('input[type="radio"]').click(function() {
         $("#viewform").submit();
       });
-      $('#filter-date').val(new Date().toISOString().slice(0,10));
 
       // Download records
       $('#download-as-Excel').click(function() {
         // Send get request to download.php with filetype=excel
-        window.location.href = "../php/download.php?filetype=excel";
+        window.location.href = "../php/download.php?filetype=xlsx";
       });
 
       $('#download-as-CSV').click(function() {
@@ -165,10 +159,6 @@ if (isset($_SESSION['errors'])){
 
       if(isset($_SESSION['name'])) {
         echo "<script>$('#filter-name').val('".$_SESSION['name']."');</script>";
-      }
-
-      if(isset($_SESSION['date'])) {
-        echo "<script>$('#filter-date').val('".$_SESSION['date']."');</script>";
       }
 
     ?>
