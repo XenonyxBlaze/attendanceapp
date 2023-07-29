@@ -9,7 +9,9 @@ if(!isset($_SESSION['report'])) {
 } else {
   $report = $_SESSION['report'];
 }
-
+if (isset($_SESSION['errors'])){
+  $errors = $_SESSION['errors'];
+}
 // foreach($report as $row){
 //   echo $row[0]."<br>";
 // }
@@ -36,6 +38,7 @@ if(!isset($_SESSION['report'])) {
       <ul>
         <li id="h1"><a href="index.html">Home</a></li>
         <li><a href="report.php">View Attendance Report</a></li>
+        <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
         <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
       </ul>
@@ -63,6 +66,7 @@ if(!isset($_SESSION['report'])) {
           id="filter-regno"
           placeholder="Registration Number"
         />
+        <!-- TODO : DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
         <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
           <option value="All">All</option>
@@ -103,7 +107,8 @@ if(!isset($_SESSION['report'])) {
           </tr>
           <?php
           if (count($report) == 0) {
-            echo "<tr><td colspan=\"3\">No data to display</td></tr>";
+            echo "<tr><td colspan=\"3\">No data to display</td></tr>
+            <tr><td colspan=\"3\">Try regenerating the report or upload relevant data.</td></tr>";
           }
 
           foreach($report as $row){
