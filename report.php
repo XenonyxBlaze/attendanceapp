@@ -68,14 +68,17 @@ if (isset($_SESSION['errors'])){
           placeholder="Registration Number"
         />
         <!-- TODO : DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
-        <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
           <option value="All">All</option>
           <option value="present">Present</option>
           <option value="absent">Absent</option>
           <option value="onleave">On Leave</option>
-          <option value="reported">Leave But Reported</option>
+          <option value="reported">Reported from Leave</option>
           <option value="new entry">New Entry</option>
+          <option value="new entry">New Entry - Present</option>
+          <option value="new entry">New Entry - Absent</option>
+          <option value="new entry">New Entry - On Leave</option>
+          <option value="new entry">New Entry - Reported from Leave</option>
         </select>
         <input type="submit" value="Go" />
       <!-- </form> -->

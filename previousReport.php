@@ -76,6 +76,10 @@ if (isset($_SESSION['errors'])){
           <option value="onleave">On Leave</option>
           <option value="reported">Leave But Reported</option>
           <option value="new entry">New Entry</option>
+          <option value="new entry">New Entry - Present</option>
+          <option value="new entry">New Entry - Absent</option>
+          <option value="new entry">New Entry - On Leave</option>
+          <option value="new entry">New Entry - Reported from Leave</option>
         </select>
         <input type="submit" value="Go" />
       <!-- </form> -->
