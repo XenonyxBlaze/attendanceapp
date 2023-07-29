@@ -137,7 +137,7 @@ if (isset($_SESSION['errors'])){
       // Download records
       $('#download-as-Excel').click(function() {
         // Send get request to download.php with filetype=excel
-        
+
         window.location.href = "download.php"+'?filetype=excel';
       });
 
