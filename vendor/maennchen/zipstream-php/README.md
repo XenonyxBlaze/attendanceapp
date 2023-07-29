@@ -37,7 +37,7 @@ For detailed instructions, please check the
 
 ```php
 // Autoload the dependencies
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 // create a new zipstream object
 $zip = new ZipStream\ZipStream(

@@ -1,8 +1,6 @@
-
 uploads/**/*
 !uploads/*
 vendor/*
-vendor/
-.vscode/
+vendor
+.vscode
 .vscode/*
-```

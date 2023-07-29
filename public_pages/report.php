@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['report'])) {
-  header('Location: genView.php');
+  header('Location: ../php/genView.php');
 } elseif(empty($_SESSION['report'])) {
   $report = array();
 } else {
@@ -23,12 +23,13 @@ if (isset($_SESSION['errors'])){
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/root.css" />
-    <link rel="stylesheet" href="css/report.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/report.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/header.css" />
 
     <title>Attendance Report</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
@@ -36,12 +37,12 @@ if (isset($_SESSION['errors'])){
       <input type="checkbox" />
       <span class="menu"> <span class="hamburger"></span> </span>
       <ul>
-        <li id="h1"><a href="index.html">Home</a></li>
-        <li><a href="report.php">View Today's Attendance Report</a></li>
-        <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-        <li><a href="pastReport.html">View Previous Reports</a></li>
-        <li><a href="UploadHostelers.html">Upload hostel masterdata</a></li>
-        <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
+        <li id="h1"><a href="../index.html">Home</a></li>
+        <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
+        <li><a href="../public_pages/pastReport.html">View Previous Reports</a></li>
+        <li><a href="../public_pages/UploadHostelers.html">Upload hostel masterdata</a></li>
+        <li><a href="../public_pages/uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
     </label>
     <div class="overlay"></div>
@@ -59,7 +60,7 @@ if (isset($_SESSION['errors'])){
 
     <h2 id="title">View attendance report:</h2>
     <div id="form-data">
-      <form action="genView.php" method="post" enctype="multipart/form-data" id="viewform">
+      <form action="../php/genView.php" method="post" enctype="multipart/form-data" id="viewform">
         <input type="text" name="name" id="filter-name" placeholder="Name" />
         <input
           type="text"
@@ -67,7 +68,7 @@ if (isset($_SESSION['errors'])){
           id="filter-regno"
           placeholder="Registration Number"
         />
-        <!-- TODO : DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
+        <!-- TODO: DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
         <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
           <option value="All">All</option>
@@ -123,7 +124,6 @@ if (isset($_SESSION['errors'])){
         </table>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
     <script>
       $('input[type="radio"]').click(function() {
         $("#viewform").submit();
@@ -133,19 +133,17 @@ if (isset($_SESSION['errors'])){
       // Download records
       $('#download-as-Excel').click(function() {
         // Send get request to download.php with filetype=excel
-        
-        window.location.href = "download.php"+'?filetype=excel';
+        window.location.href = "../php/download.php?filetype=excel";
       });
 
       $('#download-as-CSV').click(function() {
         // Send post request to download.php with filetype=csv
-        
-        window.location.href = "download.php"+'?filetype=csv';
+        window.location.href = "../php/download.php?filetype=csv";
       });
 
       $('#download-as-PDF').click(function() {
         // Send post request to download.php with filetype=pdf
-        window.location.href = "download.php"+'?filetype=pdf';
+        window.location.href = "../php/download.php?filetype=pdf";
 
       });
 

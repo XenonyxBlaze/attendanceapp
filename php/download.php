@@ -3,13 +3,13 @@
 session_start();
 
 if(!isset($_GET['filetype'])){
-    header('Location: report.php');
+    header('Location: ../public_pages/report.php');
 }
 
 $filetype = $_GET['filetype'];
 
 if(!isset($_SESSION['reportTable'])){
-    header('Location: report.php');
+    header('Location: ../public_pages/report.php');
 }
 
 $file = 'uploads/reports/'.$_SESSION['reportTable'];
@@ -33,7 +33,7 @@ if($filetype == 'excel') {
     header('Content-Length: ' . filesize($file));
     readfile($file);
 } else {
-    header('Location: report.php');
+    header('Location: ../public_pages/report.php');
 }
 
 

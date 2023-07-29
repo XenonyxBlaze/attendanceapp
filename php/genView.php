@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $block = "b1";
 } elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
     $block = $_POST['block'];
-    
+
     if(isset($_POST['date']) && $_POST['date'] != "") {
         $date = $_POST['date'];
         $date = date('dmY',strtotime($date));
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     } else {
         $_SESSION['name']='';
     }
-    
+
     if(isset($_POST['regno']) && $_POST['regno'] != "") {
         $idFilter = "ID LIKE \"".$_POST['regno']."\"";
         $_SESSION['regno']=$_POST['regno'];
@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     } else {
         $_SESSION['regno']='';
     }
-    
+
     if(isset($_POST['status']) && $_POST['status'] != "" && $_POST['status'] != "All") {
         $statusFilter = "Status LIKE \"".$_POST['status']."\"";
         $_SESSION['status']=$_POST['status'];
@@ -78,11 +78,11 @@ $reportTable = "report".$block.$date;
 
 if(!reportExists($conn, $reportTable)) {
     $_SESSION['report'] = array();
-    
+
     $_SESSION['block'] = $block;
 
     $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
-    header("Location: report.php");
+    header("Location: ../public_pages/report.php");
     die;
 }
 
@@ -106,5 +106,5 @@ $_SESSION['reportTable'] = $reportTable;
 //     echo $row[0]."<br>";
 // }
 
-header("Location: report.php");
+header("Location: ../public_pages/report.php");
 

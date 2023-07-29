@@ -1,16 +1,15 @@
--turnstile data not being verified with leave data
+# TODOS
 
--Present and absent color change
+- turnstile data not being verified with leave data
 
--turnstile data CLEAR AFTER EVERY SESSION
+- Present and absent color change
 
--Present, abssent, leave, leave but reported, New entry - Present/Absent/Leave/Leave but reported
+- turnstile data CLEAR AFTER EVERY SESSION
 
--Historical data diffrent section
+- Present, abssent, leave, leave but reported, New entry - Present/Absent/Leave/Leave but reported
 
--report exclusively for current date'
+- Historical data diffrent section
 
+- report exclusively for current date'
 
 - fetch dates for table namess from excel file only
-
-- 

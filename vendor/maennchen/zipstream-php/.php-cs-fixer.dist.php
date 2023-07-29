@@ -19,7 +19,7 @@ $finder = Finder::create()
     ->exclude('.phpdoc')
     ->exclude('docs')
     ->exclude('tools')
-    ->exclude('vendor')
+    ->exclude('../vendor')
     ->in(__DIR__);
 
 $config = new Config();

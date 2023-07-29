@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -117,7 +117,7 @@ foreach($tables as $table) {
     }
 
     $filePath='uploads\reports\\'.$reportTable;
-    
+
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
     $writer->save($filePath.'.xlsx');

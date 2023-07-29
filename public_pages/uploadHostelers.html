@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="EN">
+<html lang="en">
   <head>
-    <title>VITB Hostel Attendance</title>
-    <link rel="stylesheet" href="css/root.css" />
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="css/uploadLeave.css" />
-    <!-- NAVBAR RELATED CSS -->
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/header.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Hosteler Information</title>
+    <link rel="stylesheet" href="../css/uploadHostelers.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/report.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
@@ -16,19 +17,19 @@
       <input type="checkbox" />
       <span class="menu"> <span class="hamburger"></span> </span>
       <ul>
-        <li id="h1"><a href="index.html">Home</a></li>
-        <li><a href="report.php">View Today's Attendance Report</a></li>
-        <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-        <li><a href="pastReport.html">View Previous Reports</a></li>
-        <li><a href="UploadHostelers.html">Upload Hostel masterdata</a></li>
-        <li><a href="uploadLeave.html">Upload Hosteler leave data</a></li>
+        <li id="h1"><a href="../index.html">Home</a></li>
+        <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
+        <li><a href="../public_pages/pastReport.html">View Previous Reports</a></li>
+        <li><a href="../public_pages/UploadHostelers.html">Upload Hostel master data</a></li>
+        <li><a href="../public_pages/uploadLeave.html">Upload Hosteler leave data</a></li>
       </ul>
     </label>
     <div class="overlay"></div>
     <!-- NAVBAR HAMBURGER ENDS HERE. -->
     <header>
       <div>
-        <img src="./img/logoblack.png" alt="VITLogo" />
+        <img src="../img/logoblack.png" alt="VITLogo" />
       </div>
       <div id="center">
         <p>Hostel attendance management system</p>
@@ -36,11 +37,11 @@
       </div>
       <div></div>
     </header>
-    <!-- ? Add a manual input too. -->
+    <h2 id="title">Add Hosteler information</h2>
     <div id="main-content">
       <div id="left">
         <form
-          action="leaveUpload.php"
+          action="../php/updateMain.php"
           method="post"
           id="form-lrft"
           enctype="multipart/form-data"
@@ -51,34 +52,37 @@
             id="id"
             placeholder="Registration Number"
           />
-          <select name="status" id="">
-            <option value="onleave">On Leave</option>
-            <option value="reported">Reported</option>
+          <input type="text" name="name" id="name" placeholder="Student Name" />
+          <input type="text" name="roomnum" id="roomnum" placeholder="Room Number" />
+          <select name="block" id="blockselector">
+            <option value="b1">Boys Block - 1</option>
+            <option value="b2">Boys Block - 2</option>
+            <option value="b3">Boys Block - 3</option>
+            <option value="gh">Girls Block- 1</option>
           </select>
-          <input type="submit" value="Upload" name="submit" />
+          <input type="submit" value="Upload!" name="submit" />
         </form>
       </div>
       <div id="right">
         <form
-          action="leaveUpload.php"
+          action="../php/updateMain.php"
           method="post"
-          enctype="multipart/form-data"
           id="form-right"
-          style="justify-content: center; gap: 2rem"
+          enctype="multipart/form-data"
         >
           <div class="file-drop-area">
-            <span class="fake-btn">Upload Leave data for Today</span>
+            <span class="fake-btn">Upload Uploads from Excel</span>
             <span class="file-msg">+</span>
             <input
               type="file"
-              name="tFiles[]"
+              name="excelFile"
               id="tFiles"
               accept=".xls, .xlsx"
               class="file-input"
               required
             />
           </div>
-          <input type="submit" value="Fetch Data!" name="submit" id="submit" />
+          <input type="submit" value="Upload!" name="submit" />
         </form>
       </div>
     </div>
@@ -98,12 +102,12 @@
 
       // change inner text
       $fileInput.on("change", function () {
-        var filesCount = $(this)[0].files.length;
-        var $textContainer = $(this).prev();
+        const filesCount = $(this)[0].files.length;
+        const $textContainer = $(this).prev();
 
         if (filesCount === 1) {
           // if single file is selected, show file name
-          var fileName = $(this).val().split("\\").pop();
+          const fileName = $(this).val().split("\\").pop();
           $textContainer.text(fileName);
         } else {
           // otherwise show number of files

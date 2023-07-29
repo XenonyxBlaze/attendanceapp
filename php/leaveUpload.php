@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor\autoload.php';
+require_once '../vendor\autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
@@ -29,18 +29,15 @@ function isExcelFile($file) {
     return in_array($fileExtension, $allowedExtensions);
 }
 
-// Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['id']) && !empty($_POST['id']) && isset($_POST['roomnum']) && !empty($_POST['roomnum'])) {
         $id = $_POST['id'];
-        $name = $_POST['name'];
-        $block = $_POST['block'];
-        $roomnum = $_POST['roomnum'];
+        $status = $_POST['status'];
 
         // SQL query
-        
-        $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
+
+        $sqlQuerry = "INSERT INTO onleave(ID, Status) VALUES (\"$id\",\"$status\")";
 
         try {
             $conn->exec($sqlQuerry);
@@ -57,11 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
         foreach ($sheetData as $row) {
             $id = $row['A'];
-            $name = $row['B'];
-            $roomnum = $row['C'];
+            $status = $row['B'];
 
             // SQL query
-            $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
+            $sqlQuerry = "INSERT INTO onleave(ID, Status) VALUES (\"$id\",\"$status                                                             \")";
 
             try {
                 $conn->exec($sqlQuerry);
@@ -69,9 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } catch(PDOException $e) {
                 echo "Error : " . $e->getMessage()."<br>";
             }
-            
+
         }
     }
+
+    session_start();
+    $_SESSION['redir']='leave';
+
+    header("Location: generateReport.php");
 
 }
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/root.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
+    <!-- NAVBAR RELATED CSS -->
+    <link rel="stylesheet" href="../css/navbar.css"/>
+    <link rel="stylesheet" href="../css/header.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<label>
+    <input type="checkbox"/>
+    <span class="menu"> <span class="hamburger"></span> </span>
+    <ul>
+        <li id="h1"><a href="../index.html">Home</a></li>
+        <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
+        <li><a href="../public_pages/pastReport.html">View Previous Reports</a></li>
+        <li><a href="../public_pages/UploadHostelers.html">Upload Hostel masterdata</a></li>
+        <li><a href="../public_pages/uploadLeave.html">Upload Hosteler leave data</a></li>
+    </ul>
+</label>
+<div class="overlay"></div>
+<!-- NAVBAR HAMBURGER ENDS HERE. -->
+<header>
+    <div>
+        <img src="../img/logoblack.png" alt="VITLogo"/>
+    </div>
+    <div id="center">
+        <p>Hostel attendance management system</p>
+        <p>[HAMS v0.3]</p>
+    </div>
+    <div></div>
+</header>
+<div class="main-content">
+    <p>
+        Upload the Turnstile data by clicking the button below, or drag and
+        drop the file into the designated area. <br/>Please ensure that the
+        file you are uploading follows the required format and contains the
+        necessary data fields for the Turnstile data processing to be
+        successful.
+    </p>
+    <form
+            action="../php/turnstileUpload.php"
+            method="post"
+            enctype="multipart/form-data"
+    >
+        <div class="file-drop-area">
+            <span class="fake-btn">Upload Turnstile files</span>
+            <span class="file-msg">+</span>
+            <input
+                    type="file"
+                    name="tFiles[]"
+                    id="tFiles"
+                    multiple="multiple"
+                    accept=".xls, .xlsx"
+                    class="file-input"
+                    required
+            />
+        </div>
+        <input type="submit" value="Fetch Data!" name="submit" id="submit"/>
+    </form>
+</div>
+<script>
+    var $fileInput = $(".file-input");
+    var $droparea = $(".file-drop-area");
+
+    // highlight drag area
+    $fileInput.on("dragenter focus click", function () {
+        $droparea.addClass("is-active");
+    });
+
+    // back to normal state
+    $fileInput.on("dragleave blur drop", function () {
+        $droparea.removeClass("is-active");
+    });
+
+    // change inner text
+    $fileInput.on("change", function () {
+        const filesCount = $(this)[0].files.length;
+        const $textContainer = $(this).prev();
+
+        if (filesCount === 1) {
+            // if single file is selected, show file name
+            const fileName = $(this).val().split("\\").pop();
+            $textContainer.text(fileName);
+        } else {
+            // otherwise show number of files
+            $textContainer.text(filesCount + " files selected");
+        }
+    });
+</script>
+</body>
+</html>

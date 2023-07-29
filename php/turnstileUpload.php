@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor\autoload.php';
+require_once '../vendor\autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
@@ -39,7 +39,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
         $id = strtoupper($row[1]);
 
         $name = $row[0];
-        
+
         if (!preg_match("/^\d{2}[a-zA-Z]{3}\d{5}$/",$id)) {
             $notStudent++;
             continue;
@@ -65,7 +65,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
             echo $createQuery."<br>";
             echo "Error : " . $e->getMessage()."<br>";
         }
-    
+
         $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
 
         try {
@@ -106,23 +106,23 @@ $timestamp = date("dmY",time());
 
 foreach($uploadedFiles['name'] as $key => $fileName) {
     $file = $uploadedFiles['tmp_name'][$key];
-    
+
     $targetFile = 'TurnstileData_' . $timestamp . '_'. uniqid() . '.' . strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
     if(isExcelFile($fileName)) {
         if(move_uploaded_file($file, $targetFolder.$targetFile)) {
             echo $fileName." uploaded to server successfully<br>";
-            
+
             if(sqlTurnstile($reader, $targetFolder.$targetFile, $conn)) {
                 echo $fileName." uploaded to database successfully<br>";
                 // delete stored file
-                
+
                 unlink($targetFolder.$targetFile);
-                
+
             } else {
                 echo $fileName." upload to database failed<br>";
             }
-            
+
         } else {
             echo $fileName." upload failed<br>";
         }
