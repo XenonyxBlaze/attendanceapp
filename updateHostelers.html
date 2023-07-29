@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update Hosteler Information</title>
-    <link rel="stylesheet" href="css/updateHostelers.css" />
+    <title>Upload Hosteler Information</title>
+    <link rel="stylesheet" href="css/UploadHostelers.css" />
     <link rel="stylesheet" href="css/root.css" />
     <link rel="stylesheet" href="css/report.css" />
     <link rel="stylesheet" href="css/navbar.css" />
@@ -20,8 +20,8 @@
         <li id="h1"><a href="index.html">Home</a></li>
         <li><a href="report.php">View Attendance Report</a></li>
         <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-        <li><a href="updateHostelers.html">Update Hostel masterdata</a></li>
-        <li><a href="uploadLeave.html">Update Hosteler leave data</a></li>
+        <li><a href="UploadHostelers.html">Upload Hostel masterdata</a></li>
+        <li><a href="uploadLeave.html">Upload Hosteler leave data</a></li>
       </ul>
     </label>
     <div class="overlay"></div>
@@ -40,7 +40,7 @@
     <div id="main-content">
       <div id="left">
         <form
-          action="updateMain.php"
+          action="UploadMain.php"
           method="post"
           id="form-lrft"
           enctype="multipart/form-data"
@@ -59,18 +59,18 @@
             <option value="b3">Boys Block - 3</option>
             <option value="gh">Girls Block- 1</option>
           </select>
-          <input type="submit" value="Update!" name="submit" />
+          <input type="submit" value="Upload!" name="submit" />
         </form>
       </div>
       <div id="right">
         <form
-          action="updateMain.php"
+          action="UploadMain.php"
           method="post"
           id="form-right"
           enctype="multipart/form-data"
         >
           <div class="file-drop-area">
-            <span class="fake-btn">Upload updates from Excel</span>
+            <span class="fake-btn">Upload Uploads from Excel</span>
             <span class="file-msg">+</span>
             <input
               type="file"
@@ -81,7 +81,7 @@
               required
             />
           </div>
-          <input type="submit" value="Update!" name="submit" />
+          <input type="submit" value="Upload!" name="submit" />
         </form>
       </div>
     </div>
