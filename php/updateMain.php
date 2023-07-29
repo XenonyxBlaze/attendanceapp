@@ -10,7 +10,7 @@ $reader = new Xlsx();
 
 $sqlServer = "localhost:3306";
 $sqlUser = "root";
-$sqlPass = "toor";
+$sqlPass = "";
 
 try {
     $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
@@ -54,23 +54,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['excelFile']) && isExcelFile($_FILES['excelFile']['name'])) {
         $excelFileTmpName = $_FILES['excelFile']['tmp_name'];
         $spreadsheet = $reader->load($excelFileTmpName);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        foreach ($sheetData as $row) {
-            $id = $row['A'];
-            $name = $row['B'];
-            $roomnum = $row['C'];
 
-            // SQL query
-            $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
+        // IF FILE HAS MULTIPLE SHEETS FOR INDIVIDUAL BLOCKS
+        // Get all sheets
+        $sheetNames = $spreadsheet->getSheetNames();
 
-            try {
-                $conn->exec($sqlQuerry);
-                echo "Hosteler information uploaded successfully<br>";
-            } catch(PDOException $e) {
-                echo "Error : " . $e->getMessage()."<br>";
+        if(count($sheetNames)>1){
+            foreach ($sheetNames as $sheetName){
+                echo $sheetName."<br>";
             }
+        } else {
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheetData = $sheet->toArray(null, true, true, true);
+            foreach ($sheetData as $row) {
+                $id = $row['A'];
+                $name = $row['B'];
+                $roomnum = $row['C'];
+                $block = $row['D'];
 
+                // SQL query
+                $sqlQuerry = "INSERT INTO ".$block."master(ID, Name, roomnum) VALUES (\"$id\",\"$name\",\"$roomnum\")";
+                try {
+                    $conn->exec($sqlQuerry);
+                    echo "Hosteler information uploaded successfully<br>";
+                } catch(PDOException $e) {
+                    echo "Error : " . $e->getMessage()."<br>";
+                }
+            }
         }
+
     }
 
 }
