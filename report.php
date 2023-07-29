@@ -39,8 +39,8 @@ if (isset($_SESSION['errors'])){
         <li id="h1"><a href="index.html">Home</a></li>
         <li><a href="report.php">View Attendance Report</a></li>
         <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-        <li><a href="updateHostelers.html">Update hostel masterdata</a></li>
-        <li><a href="uploadLeave.html">Update hosteler leave data</a></li>
+        <li><a href="updateHostelers.html">Upload hostel masterdata</a></li>
+        <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
     </label>
     <div class="overlay"></div>
