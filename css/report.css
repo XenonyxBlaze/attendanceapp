@@ -79,7 +79,7 @@ h2 {
 #blockbtns input:checked + label {
   background-color: var(--primary-bg);
   color: var(--primary-color);
-  border-bottom: 0px;
+  border-bottom: 0;
 }
 
 #main-data {
@@ -116,7 +116,7 @@ tr:nth-of-type(2n + 1) {
 
 #title {
   padding: 1rem 0;
-  font-family: "akzidenz-grotesk-roman";
+  font-family: "akzidenz-grotesk-roman", sans-serif;
   margin-bottom: 2rem;
 }
 
@@ -124,4 +124,11 @@ tr:nth-of-type(2n + 1) {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 50vh;
+}
+
+.present {
+  color: green;
+}
+.absent {
+  color: darkred;
 }
