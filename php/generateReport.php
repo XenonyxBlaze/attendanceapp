@@ -9,7 +9,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 session_start();
 
 if(!isset($_SESSION['redir'])) {
-    header('Location: genView.php');
+    $redir = 'genView.php';
 }
 $redir = $_SESSION['redir'];
 if(isset($_SESSION['errors'])){
@@ -17,12 +17,16 @@ if(isset($_SESSION['errors'])){
 }
 session_reset();
 
-$date = date("dmY",time());
+if(!isset($_POST['date'])){
+    $date = date("dmY",time());
+} else {
+    $date = $_POST['date'];
+}
 
 $tables = $conn->query("SHOW TABLES LIKE 'turnstile__$date'")->fetchAll(PDO::FETCH_COLUMN);
 
 if(count($tables) == 0) {
-    echo "No records found for the given date";
+    echo "No records found for today<br>";
     die;
 }
 

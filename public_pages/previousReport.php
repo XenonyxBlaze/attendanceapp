@@ -3,18 +3,11 @@
 session_start();
 
 if(!isset($_SESSION['report'])) {
-  header('Location: genView.php');
-} elseif(empty($_SESSION['report'])) {
-  $report = array();
+  $_SESSION['redir']='previousReport.php';
+  header('Location: ../php/genView.php');
 } else {
   $report = $_SESSION['report'];
 }
-if (isset($_SESSION['errors'])){
-  $errors = $_SESSION['errors'];
-}
-// foreach($report as $row){
-//   echo $row[0]."<br>";
-// }
 
 ?>
 
@@ -23,10 +16,10 @@ if (isset($_SESSION['errors'])){
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/root.css" />
-    <link rel="stylesheet" href="css/report.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="../css/report.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/header.css" />
 
     <title>Attendance Report</title>
   </head>
@@ -36,19 +29,19 @@ if (isset($_SESSION['errors'])){
       <input type="checkbox" />
       <span class="menu"> <span class="hamburger"></span> </span>
       <ul>
-        <li id="h1"><a href="index.html">Home</a></li>
-        <li><a href="report.php">View Today's Attendance Report</a></li>
-        <li><a href="uploadTurnstile.html">Upload Turnstile Data</a></li>
-        <li><a href="previousReport.php">View Previous Reports</a></li>
-        <li><a href="uploadHostelers.html">Upload hostel masterdata</a></li>
-        <li><a href="uploadLeave.html">Upload hosteler leave data</a></li>
+        <li id="h1"><a href="../index.html">Home</a></li>
+        <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
+        <li><a href="../public_pages/previousReport.php">View Previous Reports</a></li>
+        <li><a href="../public_pages/uploadHostelers.html">Upload hostel masterdata</a></li>
+        <li><a href="../public_pages/uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
     </label>
     <div class="overlay"></div>
     <!-- NAVBAR HAMBURGER ENDS HERE. -->
     <header>
       <div>
-        <img src="./img/logoblack.png" alt="VITLogo" />
+        <img src="../img/logoblack.png" alt="VITLogo" />
       </div>
       <div id="center">
         <p font="akz">Hostel attendance management system</p>
@@ -57,9 +50,9 @@ if (isset($_SESSION['errors'])){
       <div></div>
     </header>
 
-    <h2 id="title">View attendance report:</h2>
+    <h2 id="title">View past attendance report:</h2>
     <div id="form-data">
-      <form action="genView.php" method="post" enctype="multipart/form-data" id="viewform">
+      <form action="../php/genView.php" method="post" enctype="multipart/form-data" id="viewform">
         <input type="text" name="name" id="filter-name" placeholder="Name" />
         <input
           type="text"
@@ -82,19 +75,17 @@ if (isset($_SESSION['errors'])){
           <option value="new entry">New Entry - Reported from Leave</option>
         </select>
         <input type="submit" value="Go" />
-      <!-- </form> -->
     </div>
     <div id="main-data">
       <div id="blockbtns">
-        <!-- <form action="genView.php" method="POST" enctype="multipart/form-data"> -->
-          <input type="radio" name="block" id="B1-radio" value="b1" checked />
-          <label for="B1-radio">Boys Block-1</label>
-          <input type="radio" name="block" id="B2-radio" value="b2" />
-          <label for="B2-radio">Boys Block-2</label>
-          <input type="radio" name="block" id="B3-radio" value="b3" />
-          <label for="B3-radio">Boys Block-3</label>
-          <input type="radio" name="block" id="GH-radio" value="gh" />
-          <label for="GH-radio">Girls Block-1</label>
+        <input type="radio" name="block" id="B1-radio" value="b1" checked />
+        <label for="B1-radio">Boys Block-1</label>
+        <input type="radio" name="block" id="B2-radio" value="b2" />
+        <label for="B2-radio">Boys Block-2</label>
+        <input type="radio" name="block" id="B3-radio" value="b3" />
+        <label for="B3-radio">Boys Block-3</label>
+        <input type="radio" name="block" id="GH-radio" value="gh" />
+        <label for="GH-radio">Girls Block-1</label>
         </form>
       </div>
       <div id="downloadbtns">
@@ -112,8 +103,8 @@ if (isset($_SESSION['errors'])){
           </tr>
           <?php
           if (count($report) == 0) {
-            echo "<tr><td colspan=\"3\">No data to display</td></tr>
-            <tr><td colspan=\"3\">Try regenerating the report or upload relevant data.</td></tr>";
+            echo "<tr><td colspan=\"3\">No data to display with current filters</td></tr>
+            <tr><td colspan=\"3\">Try regenerating the report.</td></tr>";
           }
 
           foreach($report as $row){
@@ -177,6 +168,7 @@ if (isset($_SESSION['errors'])){
         echo "<script>$('#filter-date').val('".$_SESSION['date']."');</script>";
       }
 
+      unset($_SESSION['report']);
     ?>
   </body>
 </html>

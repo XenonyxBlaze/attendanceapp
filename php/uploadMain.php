@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Handle batch user IDs from an uploaded Excel file
-    if (isset($_FILES['excelFile']) && isExcelFile($_FILES['excelFile']['name'])) {
+    if (isset($_FILES['excelFile']) && isExcelFile($_FILES['excelFile']['name'])  ) {
         $excelFileTmpName = $_FILES['excelFile']['tmp_name'];
         $spreadsheet = $reader->load($excelFileTmpName);
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $name = $row['B'];
                 // $roomnum = $row['C'];
                 try {
-                    $block = $row['D'];
+                    $block = $row['C'];
                 } catch (Exception $e) {
                     $block = "b1";
                 }
@@ -103,5 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
 
+    
 }
 
+header('Location: ../public_pages/uploadHostelers.html');

@@ -14,9 +14,9 @@ function sqlTurnstile($reader, $tFile, $conn) {
     $records = array_slice($sheet->toArray(),7);
 
     $insertions = 0;
-    $notStudent = 0;
 
-    $timestamp = date('dmY',time());
+    $timestamp = $sheet->getCell('A5')->getValue();
+    $timestamp = date('dmY',strtotime(substr($timestamp,-10)));
 
     foreach($records as $row) {
 
@@ -27,19 +27,14 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         $name = $row[0];
 
-        if (!preg_match("/^\d{2}[a-zA-Z]{3}\d{5}$/",$id)) {
-            $notStudent++;
-            continue;
-        }
-
         $date = $row[4];
         $time = $row[5];
         $grp = substr($row[7],12);
 
-        if(preg_match("/[a-zA-Z]{5}\s\d$/",$grp)) {
-            $block = 'B'.substr($grp,-1);
+        if ($grp=="GHBLOCK1"){
+            $block = "gh";
         } else {
-            $block = 'GH';
+            $block = "b".$grp[-1];
         }
 
         $checkpoint = $row[9];
@@ -47,10 +42,25 @@ function sqlTurnstile($reader, $tFile, $conn) {
         $createQuery = "CREATE TABLE IF NOT EXISTS turnstile".$block.$timestamp."(ID varchar(255), Name varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
 
         try {
+            echo $createQuery."<br>";
             $conn->exec($createQuery);
         } catch(PDOException $e) {
             echo $createQuery."<br>";
             echo "Error : " . $e->getMessage()."<br>";
+        }
+
+        // Find if duplicate record exists
+
+        $sqlQuerry = "SELECT * FROM turnstile".$block.$timestamp." WHERE ID = \"$id\" AND Date = \"$date\" AND Time = \"$time\" AND Attendance_Check_Point = \"$checkpoint\";";
+
+        try {
+            $result = $conn->query($sqlQuerry)->fetchAll();
+        } catch(PDOException $e) {
+            echo "Error : " . $e->getMessage()."<br>";
+        }
+
+        if(count($result) > 0) {
+            continue;
         }
 
         $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
@@ -64,7 +74,7 @@ function sqlTurnstile($reader, $tFile, $conn) {
         }
     }
 
-    if($insertions+$notStudent == count($records)) {
+    if($insertions == count($records)) {
         echo $tFile." uploaded successfully<br>";
         return true;
     } else {
@@ -118,10 +128,5 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
     }
 }
 
-$conn = null;
-
-session_start();
-$_SESSION['redir']='turnstile';
-
-header('Location: generateReport.php');
+header('Location: ../public_pages/uploadTurnstile.html');
 

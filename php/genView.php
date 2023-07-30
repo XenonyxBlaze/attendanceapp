@@ -65,22 +65,19 @@ function returnFilterConstraints($filters) {
 
 $reportTable = "report".$block.$date;
 
-if(!reportExists($conn, $reportTable)) {
-    $_SESSION['report'] = array();
+$report = array();
 
-    $_SESSION['block'] = $block;
+if(reportExists($conn, $reportTable)) {
+    $filterConstraints = returnFilterConstraints($filters);
+    $reportQuery = "SELECT * FROM $reportTable $filterConstraints";
 
-    $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
-    header("Location: ../public_pages/report.php");
-    die;
+    try {
+        $report = $conn->query($reportQuery)->fetchAll();
+    } catch(PDOException $e) {
+        echo "Error : " . $e->getMessage()."<br>";
+    }
+    
 }
-
-$filterConstraints = returnFilterConstraints($filters);
-
-$reportQuery = "SELECT * FROM $reportTable $filterConstraints";
-
-$report = $conn->query($reportQuery)->fetchAll();
-
 
 $_SESSION['report'] = $report;
 
@@ -88,12 +85,7 @@ $_SESSION['block'] = $block;
 
 $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
 
-$_SESSION['reportTable'] = $reportTable;
-
-
-// foreach($report as $row){
-//     echo $row[0]."<br>";
-// }
-
-header("Location: ../public_pages/report.php");
+if(isset($_SESSION['redir'])) {
+    header('Location: ../public_pages/'.$_SESSION['redir']);
+}
 

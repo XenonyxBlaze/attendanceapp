@@ -3,12 +3,10 @@
 session_start();
 
 if(!isset($_SESSION['report'])) {
+  $_SESSION['redir']='report.php';
   header('Location: ../php/genView.php');
-} elseif(empty($_SESSION['report'])) {
-  $report = array();
 } else {
   $report = $_SESSION['report'];
-  session_reset();
 }
 
 ?>
@@ -34,8 +32,8 @@ if(!isset($_SESSION['report'])) {
       <ul>
         <li id="h1"><a href="../index.html">Home</a></li>
         <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
-        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="../public_pages/previousReport.php">View Previous Reports</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="../public_pages/uploadHostelers.html">Upload hostel masterdata</a></li>
         <li><a href="../public_pages/uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
@@ -53,7 +51,7 @@ if(!isset($_SESSION['report'])) {
       <div></div>
     </header>
 
-    <h2 id="title">View attendance report:</h2>
+    <h2 id="title">View today's attendance report:</h2>
     <div id="form-data">
       <form action="../php/genView.php" method="post" enctype="multipart/form-data" id="viewform">
         <input type="text" name="name" id="filter-name" placeholder="Name" />
@@ -63,8 +61,6 @@ if(!isset($_SESSION['report'])) {
           id="filter-regno"
           placeholder="Registration Number"
         />
-        <!-- TODO: DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
-        <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
           <option value="All">All</option>
           <option value="present">Present</option>
@@ -74,11 +70,9 @@ if(!isset($_SESSION['report'])) {
           <option value="new entry">New Entry</option>
         </select>
         <input type="submit" value="Go" />
-      <!-- </form> -->
     </div>
     <div id="main-data">
       <div id="blockbtns">
-        <!-- <form action="genView.php" method="POST" enctype="multipart/form-data"> -->
           <input type="radio" name="block" id="B1-radio" value="b1" checked />
           <label for="B1-radio">Boys Block-1</label>
           <input type="radio" name="block" id="B2-radio" value="b2" />
@@ -105,14 +99,14 @@ if(!isset($_SESSION['report'])) {
           <?php
           if (count($report) == 0) {
             echo "<tr><td colspan=\"3\">No data to display with current filters</td></tr>
-            <tr><td colspan=\"3\">Try regenerating the report or upload relevant data.</td></tr>";
+            <tr><td colspan=\"3\">Try regenerating the report.</td></tr>";
           }
 
           foreach($report as $row){
             echo "<tr>";
-            echo "<td>".$row[0]."</td>";
-            echo "<td>".$row[1]."</td>";
-            echo "<td>".$row[2]."</td>";
+            echo "<td>".$row['ID']."</td>";
+            echo "<td>".$row['NAME']."</td>";
+            echo "<td class=\"".strtolower($row['STATUS'])."\" >".$row['STATUS']."</td>";
             echo "</tr>";
           }
           ?>
@@ -145,22 +139,23 @@ if(!isset($_SESSION['report'])) {
 
     <?php
 
-      if(isset($_SESSION['block'])) {
-        echo "<script>$('#".strtoupper($_SESSION['block'])."-radio').prop('checked', true);</script>";
-      }
+    if(isset($_SESSION['block'])) {
+      echo "<script>$('#".strtoupper($_SESSION['block'])."-radio').prop('checked', true);</script>";
+    }
 
-      if(isset($_SESSION['status'])) {
-        echo "<script>$('#filter-status').val('".$_SESSION['status']."');</script>";
-      }
+    if(isset($_SESSION['status'])) {
+      echo "<script>$('#filter-status').val('".$_SESSION['status']."');</script>";
+    }
 
-      if(isset($_SESSION['regno'])) {
-        echo "<script>$('#filter-regno').val('".$_SESSION['regno']."');</script>";
-      }
+    if(isset($_SESSION['regno'])) {
+      echo "<script>$('#filter-regno').val('".$_SESSION['regno']."');</script>";
+    }
 
-      if(isset($_SESSION['name'])) {
-        echo "<script>$('#filter-name').val('".$_SESSION['name']."');</script>";
-      }
-
+    if(isset($_SESSION['name'])) {
+      echo "<script>$('#filter-name').val('".$_SESSION['name']."');</script>";
+    }
+    
+    unset($_SESSION['report']);
     ?>
   </body>
 </html>
