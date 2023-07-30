@@ -12,7 +12,7 @@ if(!isset($_SESSION['reportTable'])){
     header('Location: ../public_pages/report.php');
 }
 
-$file = 'uploads/reports/'.$_SESSION['reportTable'];
+$file = '../uploads/reports/'.$_SESSION['reportTable'];
 
 if($filetype == 'excel') {
     $file .= '.xlsx';
