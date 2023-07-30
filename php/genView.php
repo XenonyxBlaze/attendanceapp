@@ -1,19 +1,8 @@
 <?php
+
+include 'dbConn.php';
+
 session_start();
-
-$sqlServer = "localhost:3306";
-$sqlUser = "root";
-$sqlPass = "";
-
-try {
-    $conn = new PDO("mysql:host=$sqlServer;dbname=hostel_attendance", $sqlUser, $sqlPass);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} catch(PDOException $e) {
-    echo "Connection to SQL database failed: " . $e->getMessage();
-    die;
-}
 
 // if get method then set vars elseif post method set vars
 $filters = array();

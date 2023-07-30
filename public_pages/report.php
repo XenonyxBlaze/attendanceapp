@@ -104,7 +104,7 @@ if(!isset($_SESSION['report'])) {
           </tr>
           <?php
           if (count($report) == 0) {
-            echo "<tr><td colspan=\"3\">No data to display</td></tr>
+            echo "<tr><td colspan=\"3\">No data to display with current filters</td></tr>
             <tr><td colspan=\"3\">Try regenerating the report or upload relevant data.</td></tr>";
           }
 
