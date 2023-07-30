@@ -104,6 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     
-}
+    session_start();
 
-header('Location: ../public_pages/uploadHostelers.html');
+    $_SESSION['redir']="uploadHostelers.html";
+
+    header('Location: ../php/generateReport.html');
+} else {
+    header('Location: ../index.html');
+}

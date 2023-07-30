@@ -28,6 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->exec($sqlQuerry);
             echo "Hosteler information uploaded successfully<br>";
         } catch(PDOException $e) {
+
+            try {
+                $sqlQuerry = "UPDATE onleave SET Status = \"$status\" WHERE ID = \"$id\"";
+                $conn->exec($sqlQuerry);
+                echo "Hosteler information updated successfully<br>";
+            } catch(PDOException $e) {
+                echo "Error : " . $e->getMessage()."<br>";
+            }
+
             echo "Error : " . $e->getMessage()."<br>";
         }
     }
@@ -48,6 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conn->exec($sqlQuerry);
                 echo "Hosteler information uploaded successfully<br>";
             } catch(PDOException $e) {
+
+                try {
+                    $sqlQuerry = "UPDATE onleave SET Status = \"$status\" WHERE ID = \"$id\"";
+                    $conn->exec($sqlQuerry);
+                    echo "Hosteler information updated successfully<br>";
+                } catch(PDOException $e) {
+                    echo "Error : " . $e->getMessage()."<br>";
+                }
+
                 echo "Error : " . $e->getMessage()."<br>";
             }
 
@@ -55,9 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     session_start();
-    $_SESSION['redir']='leave';
-
-    header("Location: generateReport.php");
-
+    $_SESSION['redir'] = "../public_pages/uploadLeave.html";
+    header('Location: ../php/generateReport.php');
+} else {
+    header('Location: ../index.html');
 }
-

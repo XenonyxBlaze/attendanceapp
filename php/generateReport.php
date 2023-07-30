@@ -8,14 +8,12 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 session_start();
 
-if(!isset($_SESSION['redir'])) {
-    $redir = 'genView.php';
+if(isset($_SESSION['redir'])){
+    $redir = $_SESSION['redir'];
+    unset($_SESSION['redir']);
+} else {
+    $redir = "../php/genView.html";
 }
-$redir = $_SESSION['redir'];
-if(isset($_SESSION['errors'])){
-    $errors = $_SESSION['errors'];
-}
-session_reset();
 
 if(!isset($_POST['date'])){
     $date = date("dmY",time());
@@ -26,7 +24,7 @@ if(!isset($_POST['date'])){
 $tables = $conn->query("SHOW TABLES LIKE 'turnstile__$date'")->fetchAll(PDO::FETCH_COLUMN);
 
 if(count($tables) == 0) {
-    echo "No records found for today<br>";
+    header("Location: $redir");
     die;
 }
 
@@ -122,13 +120,3 @@ foreach($tables as $table) {
 
 }
 
-switch($redir){
-    case 'main':
-        header('Location: uploadHostelers.html');
-        break;
-    case 'leave':
-        header('Location: uploadLeave.html');
-        break;
-    case 'turnstile':
-        header('Location: uploadTurnstile.html');
-}

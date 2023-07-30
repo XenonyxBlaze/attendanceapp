@@ -1,9 +1,9 @@
 <?php
 
 session_start();
+$_SESSION['redir']='report.php';
 
 if(!isset($_SESSION['report'])) {
-  $_SESSION['redir']='report.php';
   header('Location: ../php/genView.php');
 } else {
   $report = $_SESSION['report'];

@@ -89,8 +89,8 @@ function isExcelFile($file) {
     return in_array($fileExtension, $allowedExtensions);
 }
 
-if(!isset($_POST['submit'])) {
-    header('Location: index.html');
+if(!$_SERVER['REQUEST_METHOD']=='POST'){
+    header('Location: ../index.html');
 }
 
 // Define the target folder to store the Excel files
@@ -128,5 +128,6 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
     }
 }
 
-header('Location: ../public_pages/uploadTurnstile.html');
-
+session_start();
+$_SESSION['redir']='../public_pages/uploadTurnstile.html';
+header('Location: ../php/generateReport.php');

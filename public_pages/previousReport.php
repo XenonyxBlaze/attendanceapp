@@ -1,9 +1,9 @@
 <?php
 
 session_start();
+$_SESSION['redir']='previousReport.php';
 
 if(!isset($_SESSION['report'])) {
-  $_SESSION['redir']='previousReport.php';
   header('Location: ../php/genView.php');
 } else {
   $report = $_SESSION['report'];
@@ -60,7 +60,6 @@ if(!isset($_SESSION['report'])) {
           id="filter-regno"
           placeholder="Registration Number"
         />
-        <!-- TODO : DELETE DATE BUTTON AND ADD BUTTON REFRESH / REGENERATE -->
         <input type="date" name="date" id="filter-date" />
         <select name="status" id="filter-status">
           <option value="All">All</option>
