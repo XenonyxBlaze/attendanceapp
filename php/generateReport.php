@@ -12,20 +12,33 @@ if(isset($_SESSION['redir'])){
     $redir = $_SESSION['redir'];
     unset($_SESSION['redir']);
 } else {
-    $redir = "../php/genView.html";
+    $redir = "../php/genView.php";
 }
 
-if(!isset($_POST['date'])){
-    $date = date("dmY",time());
+$dates = array();
+
+if(isset($_SESSION['ts'])){
+    $ts = $_SESSION['ts'];
+    array_push($dates, $ts);
 } else {
-    $date = $_POST['date'];
+    $date = date("dmY",time());
+    array_push($dates, $date);
 }
 
-$tables = $conn->query("SHOW TABLES LIKE 'turnstile__$date'")->fetchAll(PDO::FETCH_COLUMN);
+$tables = array();
+
+foreach($dates as $date){
+    $t = $conn->query("SHOW TABLES LIKE 'turnstile__$date'")->fetchAll(PDO::FETCH_COLUMN);
+    foreach($t as $table){
+        array_push($tables, $table);
+    }
+}
 
 if(count($tables) == 0) {
+    // echo "TMOROW";
+    // echo $date;
     header("Location: $redir");
-    die;
+    // die;
 }
 
 function tableExists($conn, $table) {
@@ -77,7 +90,7 @@ foreach($tables as $table) {
     ) AS latest_turnstile
     ON m.ID = latest_turnstile.ID
     LEFT JOIN onleave AS l ON m.ID = l.ID
-    ON DUPLICATE KEY Upload Status = VALUES(Status);
+    ON DUPLICATE KEY UPDATE Status = VALUES(Status);
     ";
 
     try {
@@ -99,12 +112,12 @@ foreach($tables as $table) {
     $sheet->setCellValue('C1', 'Status');
 
     for($i = 0; $i < count($report); $i++) {
-        $sheet->setCellValue('A'.($i+2), $report[$i][0]);
-        $sheet->setCellValue('B'.($i+2), $report[$i][1]);
-        $sheet->setCellValue('C'.($i+2), $report[$i][2]);
+        $sheet->setCellValue('A'.($i+2), $report[$i]['ID']);
+        $sheet->setCellValue('B'.($i+2), $report[$i]['NAME']);
+        $sheet->setCellValue('C'.($i+2), $report[$i]['STATUS']);
     }
 
-    $filePath='uploads\reports\\'.$reportTable;
+    $filePath='../uploads/reports//'.$reportTable;
 
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
@@ -119,4 +132,6 @@ foreach($tables as $table) {
     $writer->save($filePath.'.pdf');
 
 }
+
+header("Location: $redir");
 

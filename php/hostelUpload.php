@@ -8,6 +8,12 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 $reader = new Xlsx();
 
+
+session_start();
+
+$_SESSION['redir']="../public_pages/uploadHostelers.html";
+
+
 function isExcelFile($file) {
     $allowedExtensions = array('xls', 'xlsx');
     $fileExtension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
@@ -29,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             $conn->exec($sqlQuerry);
-            echo "Hosteler information uploaded successfully<br>";
+            // echo "Hosteler information uploaded successfully<br>";
         } catch(PDOException $e) {
             echo "Error : " . $e->getMessage()."<br>";
         }
@@ -64,13 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $name = $row['B'];
                     // $roomnum = $row['C'];
 
+                    if($id == "" || $name == ""){
+                        continue;
+                    }
+
                     // SQL query
                     $sqlQuerry = "INSERT INTO ".$block."master(ID, Name) VALUES (\"$id\",\"$name\")";
                     try {
-                        // echo $sqlQuerry."<br>";
                         $conn->exec($sqlQuerry);
-                        echo "Hosteler information uploaded successfully<br>";
+                        // echo "Hosteler information uploaded successfully<br>";
                     } catch(PDOException $e) {
+                        echo $sqlQuerry."<br>";
                         echo "Error : " . $e->getMessage()."<br>";
                     }
                 }
@@ -94,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sqlQuerry = "INSERT INTO ".$block."master(ID, Name) VALUES (\"$id\",\"$name\")";
                 try {
                     $conn->exec($sqlQuerry);
-                    echo "Hosteler information uploaded successfully<br>";
+                    // echo "Hosteler information uploaded successfully<br>";
                 } catch(PDOException $e) {
                     echo "Error : " . $e->getMessage()."<br>";
                 }
@@ -103,12 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
 
-    
-    session_start();
-
-    $_SESSION['redir']="uploadHostelers.html";
-
-    header('Location: ../php/generateReport.html');
+    header('Location: ../php/generateReport.php');
 } else {
     header('Location: ../index.html');
 }

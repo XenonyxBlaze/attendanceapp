@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     if(isset($_POST['status']) && $_POST['status'] != "" && $_POST['status'] != "All") {
-        $statusFilter = "Status LIKE \"".$_POST['status']."\"";
+        $statusFilter = "Status = \"".$_POST['status']."\"";
         $_SESSION['status']=$_POST['status'];
         array_push($filters, $statusFilter);
     } else {
@@ -87,5 +87,7 @@ $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
 
 if(isset($_SESSION['redir'])) {
     header('Location: ../public_pages/'.$_SESSION['redir']);
+} else {
+    header('../index.html');
 }
 

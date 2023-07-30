@@ -31,8 +31,8 @@ if(!isset($_SESSION['report'])) {
       <ul>
         <li id="h1"><a href="../index.html">Home</a></li>
         <li><a href="../public_pages/report.php">View Today's Attendance Report</a></li>
-        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="../public_pages/previousReport.php">View Previous Reports</a></li>
+        <li><a href="../public_pages/uploadTurnstile.html">Upload Turnstile Data</a></li>
         <li><a href="../public_pages/uploadHostelers.html">Upload hostel masterdata</a></li>
         <li><a href="../public_pages/uploadLeave.html">Upload hosteler leave data</a></li>
       </ul>
@@ -108,9 +108,9 @@ if(!isset($_SESSION['report'])) {
 
           foreach($report as $row){
             echo "<tr>";
-            echo "<td>".$row[0]."</td>";
-            echo "<td>".$row[1]."</td>";
-            echo "<td>".$row[2]."</td>";
+            echo "<td>".$row['ID']."</td>";
+            echo "<td>".$row['NAME']."</td>";
+            echo "<td>".$row['STATUS']."</td>";
             echo "</tr>";
           }
           ?>

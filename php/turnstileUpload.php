@@ -15,8 +15,8 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
     $insertions = 0;
 
-    $timestamp = $sheet->getCell('A5')->getValue();
-    $timestamp = date('dmY',strtotime(substr($timestamp,-10)));
+    $timeStamp = $sheet->getCell('A5')->getValue();
+    $timeStamp = date('dmY',strtotime(str_replace("/","-",substr($timeStamp,-10))));
 
     foreach($records as $row) {
 
@@ -39,10 +39,9 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         $checkpoint = $row[9];
 
-        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile".$block.$timestamp."(ID varchar(255), Name varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
+        $createQuery = "CREATE TABLE IF NOT EXISTS turnstile".$block.$timeStamp."(ID varchar(255), Name varchar(255),Time varchar(255), Date varchar(255),Attendance_Check_Point varchar(255));";
 
         try {
-            echo $createQuery."<br>";
             $conn->exec($createQuery);
         } catch(PDOException $e) {
             echo $createQuery."<br>";
@@ -51,19 +50,19 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
         // Find if duplicate record exists
 
-        $sqlQuerry = "SELECT * FROM turnstile".$block.$timestamp." WHERE ID = \"$id\" AND Date = \"$date\" AND Time = \"$time\" AND Attendance_Check_Point = \"$checkpoint\";";
+        // $sqlQuerry = "SELECT * FROM turnstile".$block.$timestamp." WHERE ID = \"$id\" AND Date = \"$date\" AND Time = \"$time\" AND Attendance_Check_Point = \"$checkpoint\";";
 
-        try {
-            $result = $conn->query($sqlQuerry)->fetchAll();
-        } catch(PDOException $e) {
-            echo "Error : " . $e->getMessage()."<br>";
-        }
+        // try {
+        //     $result = $conn->query($sqlQuerry)->fetchAll();
+        // } catch(PDOException $e) {
+        //     echo "Error : " . $e->getMessage()."<br>";
+        // }
 
-        if(count($result) > 0) {
-            continue;
-        }
+        // if(count($result) > 0) {
+        //     continue;
+        // }
 
-        $sqlQuerry = "INSERT INTO turnstile".$block.$timestamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
+        $sqlQuerry = "INSERT INTO turnstile".$block.$timeStamp."(ID, Name, Date, Time, Attendance_Check_Point) VALUES (\"$id\",\"$name\",\"$date\",\"$time\",\"$checkpoint\");";
 
         try {
             $conn->exec($sqlQuerry);
@@ -76,11 +75,11 @@ function sqlTurnstile($reader, $tFile, $conn) {
 
     if($insertions == count($records)) {
         echo $tFile." uploaded successfully<br>";
-        return true;
     } else {
-        echo "Error uploading ".$tFile."<br>";
-        return false;
+        echo "Possible faults: $insertions out of ".count($records)." records uploaded<br>";
     }
+
+    return $timeStamp;
 }
 
 function isExcelFile($file) {
@@ -89,17 +88,19 @@ function isExcelFile($file) {
     return in_array($fileExtension, $allowedExtensions);
 }
 
-if(!$_SERVER['REQUEST_METHOD']=='POST'){
+if(!isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] !== 'POST'){
     header('Location: ../index.html');
 }
 
 // Define the target folder to store the Excel files
-$targetFolder = 'uploads/turnstile/';
+$targetFolder = '../uploads/turnstile/';
 $uploadedFiles = $_FILES['tFiles'];
 $countFiles = count($uploadedFiles['name']);
 
 $timestamp = date("dmY",time());
 // Loop through all the uploaded files
+
+$reportsGen = array();
 
 foreach($uploadedFiles['name'] as $key => $fileName) {
     $file = $uploadedFiles['tmp_name'][$key];
@@ -110,14 +111,11 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
         if(move_uploaded_file($file, $targetFolder.$targetFile)) {
             echo $fileName." uploaded to server successfully<br>";
 
-            if(sqlTurnstile($reader, $targetFolder.$targetFile, $conn)) {
-                echo $fileName." uploaded to database successfully<br>";
-                // delete stored file
+            $ts = sqlTurnstile($reader, $targetFolder.$targetFile, $conn);
+            unlink($targetFolder.$targetFile);
 
-                unlink($targetFolder.$targetFile);
-
-            } else {
-                echo $fileName." upload to database failed<br>";
+            if (!in_array($ts, $reportsGen)){
+                array_push($reportsGen, $ts);
             }
 
         } else {
@@ -130,4 +128,6 @@ foreach($uploadedFiles['name'] as $key => $fileName) {
 
 session_start();
 $_SESSION['redir']='../public_pages/uploadTurnstile.html';
+$_SESSION['ts']=$ts;
+
 header('Location: ../php/generateReport.php');
