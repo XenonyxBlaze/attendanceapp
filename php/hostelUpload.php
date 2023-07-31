@@ -43,6 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle batch user IDs from an uploaded Excel file
     if (isset($_FILES['excelFile']) && isExcelFile($_FILES['excelFile']['name'])  ) {
+
+        $conn->query("TRUNCATE b1master");
+        $conn->query("TRUNCATE b2master");
+        $conn->query("TRUNCATE b3master");
+        $conn->query("TRUNCATE ghmaster");
+
         $excelFileTmpName = $_FILES['excelFile']['tmp_name'];
         $spreadsheet = $reader->load($excelFileTmpName);
 
@@ -80,40 +86,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $conn->exec($sqlQuerry);
                         // echo "Hosteler information uploaded successfully<br>";
                     } catch(PDOException $e) {
-                        echo $sqlQuerry."<br>";
+                        // echo $sqlQuerry."<br>";
                         echo "Error : " . $e->getMessage()."<br>";
                     }
                 }
 
             }
-        } else {
-
-            $sheet = $spreadsheet->getActiveSheet();
-            $sheetData = array_slice($sheet->toArray(null, true, true, true),1);
-            foreach ($sheetData as $row) {
-                $id = $row['A'];
-                $name = $row['B'];
-                // $roomnum = $row['C'];
-                try {
-                    $block = $row['C'];
-                } catch (Exception $e) {
-                    $block = "b1";
-                }
-
-                // SQL query
-                $sqlQuerry = "INSERT INTO ".$block."master(ID, Name) VALUES (\"$id\",\"$name\")";
-                try {
-                    $conn->exec($sqlQuerry);
-                    // echo "Hosteler information uploaded successfully<br>";
-                } catch(PDOException $e) {
-                    echo "Error : " . $e->getMessage()."<br>";
-                }
-            }
         }
-
     }
 
-    header('Location: ../php/generateReport.php');
-} else {
-    header('Location: ../index.html');
 }
+
+header('Location: ../public_pages/uploadHostelers.html');

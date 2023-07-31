@@ -1,12 +1,15 @@
 <?php
 
 session_start();
-$_SESSION['redir']='previousReport.php';
+$_SESSION['redir']='../public_pages/previousReport.php';
 
 if(!isset($_SESSION['report'])) {
   header('Location: ../php/genView.php');
 } else {
   $report = $_SESSION['report'];
+  $rt = $_SESSION['reportTable'];
+
+  $_SESSION['reportTable'] = $rt;
 }
 
 ?>
@@ -22,6 +25,7 @@ if(!isset($_SESSION['report'])) {
     <link rel="stylesheet" href="../css/header.css" />
 
     <title>Attendance Report</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <!-- NAVBAR HTML: (Expandable by adding more anchor tags) -->
@@ -65,13 +69,12 @@ if(!isset($_SESSION['report'])) {
           <option value="All">All</option>
           <option value="present">Present</option>
           <option value="absent">Absent</option>
-          <option value="onleave">On Leave</option>
+          <option value="leave">On Leave</option>
           <option value="reported">Leave But Reported</option>
-          <option value="new entry">New Entry</option>
-          <option value="new entry">New Entry - Present</option>
-          <option value="new entry">New Entry - Absent</option>
-          <option value="new entry">New Entry - On Leave</option>
-          <option value="new entry">New Entry - Reported from Leave</option>
+          <option value="ne-present">New Entry - Present</option>
+          <option value="ne-absent">New Entry - Absent</option>
+          <option value="ne-leave">New Entry - On Leave</option>
+          <option value="ne-reported">New Entry - Reported from Leave</option>
         </select>
         <input type="submit" value="Go" />
     </div>
@@ -107,7 +110,7 @@ if(!isset($_SESSION['report'])) {
           }
 
           foreach($report as $row){
-            echo "<tr>";
+            echo "<tr class=\"".strtolower($row['STATUS'])."\">";
             echo "<td>".$row['ID']."</td>";
             echo "<td>".$row['NAME']."</td>";
             echo "<td>".$row['STATUS']."</td>";
@@ -128,18 +131,18 @@ if(!isset($_SESSION['report'])) {
       $('#download-as-Excel').click(function() {
         // Send get request to download.php with filetype=excel
 
-        window.location.href = "download.php"+'?filetype=excel';
+        window.location.href = "../php/download.php"+'?filetype=xlsx';
       });
 
       $('#download-as-CSV').click(function() {
         // Send post request to download.php with filetype=csv
 
-        window.location.href = "download.php"+'?filetype=csv';
+        window.location.href = "../php/download.php"+'?filetype=csv';
       });
 
       $('#download-as-PDF').click(function() {
         // Send post request to download.php with filetype=pdf
-        window.location.href = "download.php"+'?filetype=pdf';
+        window.location.href = "../php/download.php"+'?filetype=pdf';
 
       });
 

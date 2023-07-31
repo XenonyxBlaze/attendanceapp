@@ -1,12 +1,15 @@
 <?php
 
 session_start();
-$_SESSION['redir']='report.php';
+$_SESSION['redir']='../public_pages/report.php';
 
 if(!isset($_SESSION['report'])) {
   header('Location: ../php/genView.php');
 } else {
   $report = $_SESSION['report'];
+  $rt = $_SESSION['reportTable'];
+
+  $_SESSION['reportTable'] = $rt;
 }
 
 ?>
@@ -51,7 +54,7 @@ if(!isset($_SESSION['report'])) {
       <div></div>
     </header>
 
-    <h2 id="title">View today's attendance report:</h2>
+    <h2 id="title">View today's attendance report: <button onclick="window.location = '../php/generateReport.php'">Generate Report</button></h2>
     <div id="form-data">
       <form action="../php/genView.php" method="post" enctype="multipart/form-data" id="viewform">
         <input type="text" name="name" id="filter-name" placeholder="Name" />
@@ -67,7 +70,10 @@ if(!isset($_SESSION['report'])) {
           <option value="absent">Absent</option>
           <option value="onleave">On Leave</option>
           <option value="reported">Leave But Reported</option>
-          <option value="new entry">New Entry</option>
+          <option value="ne-present">New Entry - Present</option>
+          <option value="ne-absent">New Entry - Absent</option>
+          <option value="ne-leave">New Entry - On Leave</option>
+          <option value="ne-reported">New Entry - Reported from Leave</option>
         </select>
         <input type="submit" value="Go" />
     </div>
@@ -103,10 +109,10 @@ if(!isset($_SESSION['report'])) {
           }
 
           foreach($report as $row){
-            echo "<tr>";
+            echo "<tr class=\"".strtolower($row['STATUS'])."\">";
             echo "<td>".$row['ID']."</td>";
             echo "<td>".$row['NAME']."</td>";
-            echo "<td class=\"".strtolower($row['STATUS'])."\" >".$row['STATUS']."</td>";
+            echo "<td>".$row['STATUS']."</td>";
             echo "</tr>";
           }
           ?>

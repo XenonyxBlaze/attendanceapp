@@ -28,7 +28,8 @@ h2 {
   color: var(--primary-color);
   border-bottom: 1px solid var(--primary-border);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1rem;
   font-size: 1.2rem;
   line-height: 1.5;
 }
@@ -95,6 +96,8 @@ table {
   margin: 0 auto;
   border-collapse: collapse;
   text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 td,
@@ -126,9 +129,21 @@ tr:nth-of-type(2n + 1) {
   height: 50vh;
 }
 
-.present {
-  color: green;
+/* .present, */
+/* .ne-present { */
+  /* color: #00AA00; */
+  /* background-color: #00AA0033; */
+  /* color: #00AA00; */
+/* } */
+.absent,
+.ne-absent {
+  /* color: #CC0000; */
+  /* background-color: #CC000033; */
+  color: #AA0000;
 }
-.absent {
-  color: darkred;
-}
+
+/* .leave, .ne-leave { */
+  /* color: #0000CC; */
+  /* background-color: #0000CC33; */
+  /* color: #0000CC; */
+/* } */

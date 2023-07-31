@@ -81,13 +81,15 @@ if(reportExists($conn, $reportTable)) {
 
 $_SESSION['report'] = $report;
 
+$_SESSION['reportTable'] = $reportTable;
+
 $_SESSION['block'] = $block;
 
 $_SESSION['date'] = DateTime::createFromFormat('dmY', $date)->format('Y-m-d');
 
 if(isset($_SESSION['redir'])) {
-    header('Location: ../public_pages/'.$_SESSION['redir']);
+    header('Location: '.$_SESSION['redir']);
 } else {
-    header('../index.html');
+    header('Location: ../index.html');
 }
 

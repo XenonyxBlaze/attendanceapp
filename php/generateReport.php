@@ -51,11 +51,9 @@ foreach($tables as $table) {
 
     $reportTable = "report".substr($table,9);
 
-    $block = substr($table,9,2);
+    $blockTable = substr($table,9,2)."master";
 
-    $reportExists = tableExists($conn, $reportTable);
-
-    if($reportExists) {
+    if(tableExists($conn, $reportTable)){
         $conn->exec("DROP TABLE $reportTable");
     }
 
@@ -63,17 +61,40 @@ foreach($tables as $table) {
 
     $conn->exec($createReportQuery);
 
-    $reportGenQuery = "
-    INSERT INTO $reportTable (
-        ID,
+    $neTable = "newEntry".substr($table,9);
+
+    if(tableExists($conn, $neTable)){
+        $conn->exec("DROP TABLE $neTable");
+    }
+
+    $crNeTable = "CREATE TABLE IF NOT EXISTS ".$neTable."(
+        ID varchar(255),
+        NAME varchar(255),
+        Time varchar(255),
+        Date varchar(255),
+        Attendance_Check_Point varchar(255)
+    );";
+
+    $conn->exec($crNeTable);
+
+    $neQuery = "INSERT INTO $neTable(ID, NAME, Time, Date, Attendance_Check_Point)
+    SELECT t.ID, t.NAME, t.Time, t.Date, t.Attendance_Check_Point
+    FROM $table t
+    LEFT JOIN $blockTable b ON t.ID = b.ID
+    WHERE b.ID IS NULL;";
+
+    $delNeQuery = "DELETE FROM $table WHERE ID NOT IN (SELECT ID FROM $blockTable);";
+
+    $nneReportQuery = "INSERT INTO $reportTable (
         Name,
-        Status
+        ID,
+        STATUS
     )
     SELECT
-        m.ID,
         m.Name,
-        COALESCE(l.STATUS, CASE WHEN latest_turnstile.STATUS IS NOT NULL THEN latest_turnstile.STATUS ELSE NULL END, 'NEW ENTRY')
-    FROM " . $block . "master AS m
+        m.ID,
+        COALESCE(l.STATUS, CASE WHEN latest_turnstile.STATUS IS NOT NULL THEN latest_turnstile.STATUS ELSE NULL END, 'PRESENT')
+    FROM $blockTable AS m
     LEFT JOIN (
         SELECT t.ID,
                CASE
@@ -93,10 +114,36 @@ foreach($tables as $table) {
     ON DUPLICATE KEY UPDATE Status = VALUES(Status);
     ";
 
+    $finalReportQuery = "INSERT INTO $reportTable (
+        ID,
+        STATUS
+    )
+    SELECT t1.ID,
+           CASE
+               WHEN t2.ID IS NOT NULL THEN
+                   CASE
+                       WHEN t2.STATUS = 'LEAVE' THEN 'NE-LEAVE'
+                       WHEN t2.STATUS = 'REPORTED' THEN 'NE-REPORTED'
+                   END
+               WHEN t1.Attendance_Check_Point LIKE '%ENTRY%' THEN 'NE-PRESENT'
+               ELSE 'NE-ABSENT'
+           END AS STATUS
+    FROM $neTable t1
+    LEFT JOIN hostel_attendance.onleave t2 ON t1.ID = t2.ID AND t2.STATUS IN ('LEAVE', 'REPORTED')
+    INNER JOIN (
+        SELECT ID, MAX(Time) AS MaxTime
+        FROM $neTable
+        GROUP BY ID
+    ) t3 ON t1.ID = t3.ID AND t1.Time = t3.MaxTime;";
+
     try {
-        $conn->exec($reportGenQuery);
+        $conn->exec($neQuery);
+        $conn->exec($delNeQuery);
+        $conn->exec($nneReportQuery);
+        $conn->exec($finalReportQuery);
+        $conn->exec("INSERT INTO $table (SELECT * FROM $neTable);");
+        $conn->exec("DROP TABLE $neTable");
     } catch(PDOException $e) {
-        echo $reportGenQuery."<br>";
         echo "Error : " . $e->getMessage()."<br>";
     }
 
