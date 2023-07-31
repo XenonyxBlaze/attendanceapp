@@ -15,7 +15,8 @@ body {
 #main-content > form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2em;
   height: 92vh;
   width: 70%;
   margin: 0 auto;
